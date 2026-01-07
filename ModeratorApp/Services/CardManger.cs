@@ -24,6 +24,7 @@ namespace ModeratorApp.Services {
             public int age { get; set; }
             public string email { get; set; }
             public string color { get; set; }
+            public byte[] user_img { get; set; }
         }
 
         public struct RoleData {

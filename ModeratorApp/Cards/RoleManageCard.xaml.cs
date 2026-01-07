@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using ModeratorApp.Services;
+using TEST_APP.Services;
 namespace ModeratorApp.Cards;
 
 public partial class RoleManageCard : ContentView
@@ -13,11 +14,11 @@ public partial class RoleManageCard : ContentView
         BindingContext = _role_data;
     }
 
-    private void OnCloseClicked(object sender, EventArgs e) {
-        string query = $"DELETE FROM Roles WHERE name = @role_name;";
-        var command = new SqlCommand(query);
-        command.Parameters.AddWithValue("@role_name", role_data);
-        DatabaseConnector.ExecuteNonQuery(command);
+    private async void OnCloseClicked(object sender, EventArgs e) {
+        await DatabaseConnector.Client
+           .From<Models.Roles>()
+           .Where(v => v.name == role_data.name)
+           .Delete();
 
         // destroy this object
         if (this.Parent is Layout parentLayout) {

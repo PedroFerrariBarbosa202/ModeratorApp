@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Controls;
 using ModeratorApp.Services;
 using System.Diagnostics;
+using TEST_APP.Services;
 
 public partial class ClientCard : ContentView {
     private CardManager.ClientData client_data;
@@ -20,6 +21,7 @@ public partial class ClientCard : ContentView {
         ClientDataLabel.Text = @$"Nome: {client_data.name}
 Idade: {client_data.age}
 Email: {client_data.email}";
+        //UserImage.Source = ImageSource.FromStream(() => new MemoryStream(c_data.user_img));
     }
 
     public VerticalStackLayout RoleStackLayout => RoleStack;
@@ -35,14 +37,15 @@ Email: {client_data.email}";
         }
     }
 
-    private void OnRemoveClicked(object sender, EventArgs e) {
+    private async void OnRemoveClicked(object sender, EventArgs e) {
         if (sender is Button btn) {
             if (!event_data.Equals(default(CardManager.EventData)) && btn.BackgroundColor == Colors.Red) {
-                string query = "DELETE FROM Volunteer_Event WHERE volunteer_ID = @client_id AND event_ID = @event_id;";
-                var command = new SqlCommand(query);
-                command.Parameters.AddWithValue("@client_id", client_data.client_id);
-                command.Parameters.AddWithValue("@event_id", event_data.event_id);
-                DatabaseConnector.ExecuteNonQuery(command);
+                await DatabaseConnector.InitializeAsync();
+                await DatabaseConnector.Client
+                    .From<Models.VolunteerEvent>()
+                    .Where(v => v.volunteer_ID == client_data.client_id)
+                    .Where(v => v.event_ID == event_data.event_id)
+                    .Delete();
 
                 btn.BackgroundColor = Colors.Gray;
                 btn.Text = "Removed";

@@ -1,7 +1,8 @@
-using ModeratorApp.Services;
 using Microsoft.Data.SqlClient;
-using System.Diagnostics;
+using ModeratorApp.Services;
 using System.Data;
+using System.Diagnostics;
+using TEST_APP.Services;
 
 namespace ModeratorApp.Cards;
 
@@ -18,20 +19,23 @@ public partial class SubRoleShowCard : ContentView {
         client_data = _client_data;
         BindingContext = role_data;
 
-        // get role limit
-        var command = new SqlCommand("SELECT * FROM Volunteer_Event WHERE role_ID = @role_id AND event_ID = @event_id AND volunteer_ID = @volunteer_id");
-        command.Parameters.AddWithValue("@role_id", role_data.role_id);
-        command.Parameters.AddWithValue("@event_id", event_data.event_id);
-        command.Parameters.AddWithValue("@volunteer_id", client_data.client_id);
+        SetLabels();
+    }
 
-        DataTable? table =DatabaseConnector.ExecuteReadQuery(command);
+    private async void SetLabels() {
+        var response = await DatabaseConnector.Client
+           .From<Models.VolunteerEvent>()
+           .Where(v => v.role_ID == role_data.role_id)
+           .Where(v => v.event_ID == event_data.event_id)
+           .Where(v => v.volunteer_ID == client_data.client_id)
+           .Single();
 
-        if (table != null) {
-            DateLabel.Text = $"Data: {DateOnly.FromDateTime(Convert.ToDateTime(table.Rows[0]["date"])).ToString()}";
-            TimeBeginLabel.Text = $"Início: {table.Rows[0]["time_begin"]}";
-            TimeEndLabel.Text = $"Fim: {table.Rows[0]["time_end"]}";
-            RoleName = role_data.name;
-        }
+        if (response == null) return;
+
+        DateLabel.Text = $"Data: {response.date.ToString()}";
+        TimeBeginLabel.Text = $"Início: {response.time_begin.ToString()}";
+        TimeEndLabel.Text = $"Fim: {response.time_end.ToString()}";
+        RoleName = role_data.name;
     }
 
     private void OnCloseClicked(object sender, EventArgs e) {

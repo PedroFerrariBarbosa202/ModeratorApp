@@ -2,7 +2,7 @@ is_global = true
 build_property.TargetFramework = net9.0-windows10.0.19041.0
 build_property.TargetPlatformMinVersion = 10.0.17763.0
 build_property.UsingMicrosoftNETSdkWeb = 
-build_property.ProjectTypeGuids = 9A19103F-16F7-4668-BE54-9A1E7A4F7556
+build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
@@ -21,93 +21,3 @@ build_property.CsWinRTAotWarningLevel =
 build_property.CsWinRTUseWindowsUIXamlProjections = false
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/App.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.App.xaml
-build_metadata.AdditionalFiles.TargetPath = App.xaml
-build_metadata.AdditionalFiles.RelativePath = App.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/AppShell.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.AppShell.xaml
-build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
-build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/ClientCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.ClientCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\ClientCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\ClientCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/EventCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.EventCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\EventCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\EventCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/RoleLimitCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.RoleLimitCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\RoleLimitCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\RoleLimitCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/RoleManageCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.RoleManageCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\RoleManageCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\RoleManageCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/RoleReadCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.RoleReadCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\RoleReadCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\RoleReadCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/SubRoleShowCard.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.SubRoleShowCard.xaml
-build_metadata.AdditionalFiles.TargetPath = Cards\SubRoleShowCard.xaml
-build_metadata.AdditionalFiles.RelativePath = Cards\SubRoleShowCard.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/Page/EventPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Page.EventPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Content\Page\EventPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Content\Page\EventPage.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/Page/LoginPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Page.LoginPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Content\Page\LoginPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Content\Page\LoginPage.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/Page/MainPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Page.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = Content\Page\MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = Content\Page\MainPage.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/EventForm.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.View.EventForm.xaml
-build_metadata.AdditionalFiles.TargetPath = Content\View\EventForm.xaml
-build_metadata.AdditionalFiles.RelativePath = Content\View\EventForm.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/RoleForm.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.View.RoleForm.xaml
-build_metadata.AdditionalFiles.TargetPath = Content\View\RoleForm.xaml
-build_metadata.AdditionalFiles.RelativePath = Content\View\RoleForm.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Resources/Styles/Colors.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Resources.Styles.Colors.xaml
-build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
-build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
-
-[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Resources/Styles/Styles.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Resources.Styles.Styles.xaml
-build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
-build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml

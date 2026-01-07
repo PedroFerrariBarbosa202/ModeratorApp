@@ -1,65 +1,37 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Data;
-using System.Diagnostics;
+﻿using Supabase;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
 
+namespace TEST_APP.Services {
+    public static class DatabaseConnector {
+        private static readonly string url =
+            "https://xacemhnbvvfqpzzbcwei.supabase.co";
 
-namespace ModeratorApp.Services {
-    static class DatabaseConnector {
-        static string connectionString = @"Server=192.168.1.132,1433;
-                                           Database=Amo_Database;
-                                           User Id=AmoUser;
-                                           Password=barbosa20;
-                                           TrustServerCertificate=True;";
+        private static readonly string anonKey =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhY2VtaG5idnZmcXB6emJjd2VpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxOTQ2NTgsImV4cCI6MjA4Mjc3MDY1OH0.NqOQz5h6snNDoHOFSdL15CciHjWtUCp2gu7yXaucaE4";
 
-        public static DataTable ExecuteReadQuery(SqlCommand command) {
-            var dataTable = new DataTable();
+        public static Client Client;
 
-            try {
-                using (var connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    command.Connection = connection;
-                    using (var reader = command.ExecuteReader()) {
-                        dataTable.Load(reader);
-                    }
-                    Debug.WriteLine("Query executed successfully: " + command.CommandText);
-                }
-            }
-            catch (Exception ex) {
-                Debug.WriteLine("An error occurred: " + ex.Message);
-            }
-            return dataTable;
-        }
-        public static int ExecuteNonQuery(SqlCommand command) {
-            int rowsAffected = 0;
-            try {
-                using (var connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    command.Connection = connection;
-                    rowsAffected = command.ExecuteNonQuery();
-                    Debug.WriteLine("query executed successfully: " + command.CommandText);
-                }
-            }
-            catch (Exception ex) {
-                Debug.WriteLine("An error occurred: " + ex.Message);
-            }
-            return rowsAffected;
+        public static async Task InitializeAsync() {
+            if (Client != null)
+                return;
+
+            var options = new SupabaseOptions {
+                AutoConnectRealtime = false
+            };
+
+            Client = new Client(url, anonKey, options);
+            await Client.InitializeAsync();
         }
 
-        // query that returns an object that is then converted to a type
-        public static object? ExecuteScalarQuery(SqlCommand command) {
-            object? result = null;
-            try {
-                using (var connection = new SqlConnection(connectionString)) {
-                    connection.Open();
-                    command.Connection = connection;
-                    result = command.ExecuteScalar();
-                    Debug.WriteLine("Scalar query executed successfully: " + command.CommandText);
-                }
-            }
-            catch (Exception ex) {
-                Debug.WriteLine("An error occurred: " + ex.Message);
-            }
-            return result;
+        public static async Task<List<T>> GetTable<T>()
+            where T : BaseModel, new() {
+            await InitializeAsync();
+            var result = await Client
+                .From<T>()
+                .Get();
+
+            return result.Models;
         }
     }
 }

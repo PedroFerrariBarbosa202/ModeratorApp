@@ -1,9 +1,11 @@
-using System.Data;
-using System.Diagnostics;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using ModeratorApp.Cards;
 using ModeratorApp.Services;
+using System.Data;
+using System.Diagnostics;
+using TEST_APP.Services;
+using static ModeratorApp.Services.CardManager;
 
 namespace ModeratorApp;
 
@@ -23,28 +25,28 @@ public partial class EventPage : ContentPage {
         ShowClients();
     }
 
-    private void ShowClients() {
-        string query = "SELECT volunteer_ID FROM Volunteer_Event WHERE Volunteer_Event.event_ID = @ev_data";
-        var command = new SqlCommand(query);
-        command.Parameters.AddWithValue("@ev_data", ev_data.event_id);
-
-        DataTable? table = DatabaseConnector.ExecuteReadQuery(command);
+    private async void ShowClients() {
+        await DatabaseConnector.InitializeAsync();
+        
+        // get 
+        var response = await DatabaseConnector.Client
+             .From<Models.VolunteerEvent>()
+             .Where(v => v.event_ID == ev_data.event_id)
+             .Get();
 
         HashSet<string> seen_volunteers = new HashSet<string>();
 
-        foreach (DataRow row in table.Rows) {
-            string client_query = "SELECT * FROM Volunteer WHERE volunteer_ID = @client_id;";
-            var client_command = new SqlCommand(client_query);
-            client_command.Parameters.AddWithValue("@client_id", row["volunteer_ID"]);
+        foreach (Models.VolunteerEvent row in response.Models) {
+            var volunteer = await DatabaseConnector.Client
+               .From<Models.Volunteer>()
+               .Where(v => v.volunteer_ID == row.volunteer_ID)
+               .Single();
 
-            var client_table = DatabaseConnector.ExecuteReadQuery(client_command);
-
-            foreach (DataRow client_row in client_table.Rows) {
                 //if client doent exist, continue
-                if (client_row == null)
+                if (volunteer == null)
                     continue;
 
-                string? client_name = client_row["name"].ToString();
+                string? client_name = volunteer.name;
 
                 //if name doent exist, continue
                 if (client_name == null)
@@ -54,36 +56,39 @@ public partial class EventPage : ContentPage {
                 if (seen_volunteers.Contains(client_name)) {
                     //if client in Hash set
                     continue;
-
                 }
                 else {
                     //if client not in HashSet, add it
                     var client_data = new CardManager.ClientData {
-                        client_id = Convert.ToInt32(client_row["volunteer_ID"]),
+                        client_id = volunteer.volunteer_ID,
                         name = client_name,
-                        age = Convert.ToInt32(client_row["age"]),
-                        email = client_row["email"].ToString() ?? "None",
-                        color = CardManager.GetRandomColor().ToHex()
+                        age = volunteer.age,
+                        email = volunteer.email,
+                        color = CardManager.GetRandomColor().ToHex(),
+                        user_img = volunteer.user_img,
                     };
                     ClientCard client_card = CardManager.add_client(client_data, ev_data, ClientStackLayout);
                     seen_volunteers.Add(client_name);
 
-                    // add roles
-                    var role_command = new SqlCommand(@"
-                                                SELECT R.*
-                                                FROM Roles R
-                                                INNER JOIN Volunteer_Event VE ON R.role_ID = VE.role_ID
-                                                WHERE VE.event_ID = @event_id AND VE.volunteer_ID = @volunteer_id;");
+                    // add role
+                var vol_ev_roles = await DatabaseConnector.Client
+                      .From<Models.VolunteerEvent>()
+                      .Where(v => v.event_ID == ev_data.event_id)
+                      .Where(v => v.volunteer_ID == volunteer.volunteer_ID)
+                      .Get();
 
-                    role_command.Parameters.AddWithValue("@event_id", ev_data.event_id);
-                    role_command.Parameters.AddWithValue("@volunteer_id", client_row["volunteer_ID"]);
+                foreach (Models.VolunteerEvent role_row in vol_ev_roles.Models) {
+                    var role = await DatabaseConnector.Client
+                      .From<Models.Roles>()
+                      .Where(v => v.role_ID == role_row.role_ID)
+                      .Single();
 
-                    var role_table = DatabaseConnector.ExecuteReadQuery(role_command);
+                    if (role == null)
+                        continue;
 
-                    foreach (DataRow role_row in role_table.Rows) {
-                        var role_data = new CardManager.RoleData {
-                            role_id = Convert.ToInt32(role_row["role_ID"]),
-                            name = role_row["name"].ToString() ?? "None",
+                    var role_data = new CardManager.RoleData {
+                            role_id = role.role_ID,
+                            name = role.name,
                             color = CardManager.GetRandomColor().ToHex()
                         };
                         VerticalStackLayout role_stack = client_card.RoleStackLayout;
@@ -91,29 +96,32 @@ public partial class EventPage : ContentPage {
 
                         Debug.WriteLine("Added Role to " + client_name);
                     }
-                }
+                
             }
         }
     }
 
-    private void AddRoles() {
-        Debug.WriteLine("GOT HERE");
-        var command = new SqlCommand(
-        @"SELECT *
-          FROM Roles
-          WHERE role_id IN (
-              SELECT role_id
-              FROM Event_Role
-              WHERE event_ID = @event_id
-          );");
-        command.Parameters.AddWithValue("@event_id", ev_data.event_id);
+    private async void AddRoles() {
+        await DatabaseConnector.InitializeAsync();
 
-        var table = DatabaseConnector.ExecuteReadQuery(command);
+        // get all role_ids that are associated with a event
+        var response = await DatabaseConnector.Client
+          .From<Models.EventRole>()
+          .Where(v => v.event_ID == ev_data.event_id)
+          .Get();
 
-        foreach(DataRow row in table.Rows) {
+        foreach(Models.EventRole row in response.Models) {
+            // get role info by role_ID
+            var role = await DatabaseConnector.Client
+              .From<Models.Roles>()
+              .Where(v => v.role_ID == row.role_ID)
+              .Single();
+            
+            if(role == null) continue;
+
             var role_data = new CardManager.RoleData {
-                role_id = Convert.ToInt32(row["role_ID"]),
-                name = row["name"].ToString() ?? "None",
+                role_id = role.role_ID,
+                name = role.name,
                 color = CardManager.GetRandomColor().ToHex()
             };
             CardManager.add_role_limit(role_data, ev_data, RoleStack);

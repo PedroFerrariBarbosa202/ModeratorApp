@@ -1,6 +1,7 @@
-using ModeratorApp.Services;
 using Microsoft.Data.SqlClient;
+using ModeratorApp.Services;
 using System.Diagnostics;
+using TEST_APP.Services;
 
 namespace ModeratorApp.Cards;
 
@@ -15,13 +16,21 @@ public partial class RoleLimitCard : ContentView {
         event_data = _event_data;
         BindingContext = role_data;
 
-        // get role limit
-        var command = new SqlCommand("SELECT number_limit FROM Event_Role WHERE role_ID = @role_id AND event_ID = @event_id");
-        command.Parameters.AddWithValue("@role_id", role_data.role_id);
-        command.Parameters.AddWithValue("@event_id", event_data.event_id);
+        SetRoleLimit();
+    }
 
-        int r_id = Convert.ToInt32(DatabaseConnector.ExecuteScalarQuery(command));
-        NumLimitLabel.Text = $"Vagas disponíveis: {r_id}";
+    private async void SetRoleLimit() {
+        // get role limit
+        var role = await DatabaseConnector.Client
+          .From<Models.EventRole>()
+          .Where(v => v.role_ID == role_data.role_id)
+          .Where(v => v.event_ID == event_data.event_id)
+          .Single();
+
+        if (role == null)
+            return;
+
+        NumLimitLabel.Text = $"Vagas disponíveis: {role.role_ID}";
         RoleName = role_data.name;
     }
 

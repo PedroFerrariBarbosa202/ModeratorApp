@@ -1,7 +1,9 @@
-using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Storage;
 using ModeratorApp.Services;
+using System.Data;
+using TEST_APP.Services;
+using static ModeratorApp.Services.CardManager;
 
 namespace ModeratorApp;
 
@@ -13,18 +15,20 @@ public partial class RoleForm : ContentView
 		ShowRoles();
 	}
 
-	void ShowRoles() {
+	async void ShowRoles() {
         // remove all current elements
         RoleStack.Children.Clear();
+        await DatabaseConnector.InitializeAsync();
 
-        string query = "SELECT * FROM roles";
-        var command = new SqlCommand(query);
-        DataTable? table = DatabaseConnector.ExecuteReadQuery(command);
+        // get all roles
+        var roles = await DatabaseConnector.Client
+            .From<Models.Roles>()
+            .Get();
 
-        foreach (DataRow row in table.Rows) {
+        foreach (Models.Roles row in roles.Models) {
             var role_data = new CardManager.RoleData {
-                role_id = Convert.ToInt32(row["role_id"]),
-                name = row["name"].ToString() ?? "None",
+                role_id = row.role_ID,
+                name = row.name,
                 color = GetRandomColor().ToHex()
             };
 
@@ -32,11 +36,18 @@ public partial class RoleForm : ContentView
         }
 	}
 
-    void AddRole(object sender, EventArgs e) {
-        string query = $"INSERT INTO Roles(name) VALUES(@role_name);";
-        var client_command = new SqlCommand(query);
-        client_command.Parameters.AddWithValue("@role_name", RoleEntry.Text);
-        DatabaseConnector.ExecuteNonQuery(client_command);
+    async void AddRole(object sender, EventArgs e) {
+        if (RoleEntry.Text == null)
+            return;
+
+        var role = new Models.Roles {
+            name = RoleEntry.Text
+        };
+
+        await DatabaseConnector.Client
+                 .From<Models.Roles>()
+                 .Insert(role);
+
         ShowRoles();
     }
     private void OnCloseClicked(object sender, EventArgs e) {

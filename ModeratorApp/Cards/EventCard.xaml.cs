@@ -2,6 +2,8 @@ using Microsoft.Data.SqlClient;
 using ModeratorApp.Services;
 using System.Data;
 using System.Threading;
+using TEST_APP.Services;
+using static ModeratorApp.Services.CardManager;
 namespace ModeratorApp.Cards;
 
 public partial class EventCard : ContentView
@@ -25,25 +27,29 @@ public partial class EventCard : ContentView
         await Navigation.PushAsync(new EventPage(event_data));
 
     }
-    public void RemoveEvent(object sender, EventArgs e) {
+    public async void RemoveEvent(object sender, EventArgs e) {
         if (sender is Button btn) {
             if (!event_data.Equals(default(CardManager.EventData)) && btn.BackgroundColor == Colors.Red) {
-                string deleteClientsQuery = "DELETE FROM Volunteer_Event WHERE event_ID = @event_id;";
-                string deleteRoleQuery = "DELETE FROM Event_Role WHERE event_ID = @event_id;";
-                string deleteEventQuery = "DELETE FROM Events WHERE event_ID = @event_id;";
-
-                var deleteClientsCommand = new SqlCommand(deleteClientsQuery);
-                var deleteRoleCommand = new SqlCommand(deleteRoleQuery);
-                var deleteEventCommand = new SqlCommand(deleteEventQuery);
-
-                deleteClientsCommand.Parameters.AddWithValue("@event_id", event_data.event_id);
-                deleteRoleCommand.Parameters.AddWithValue("@event_id", event_data.event_id);
-                deleteEventCommand.Parameters.AddWithValue("@event_id", event_data.event_id);
-
                 try {
-                    DatabaseConnector.ExecuteNonQuery(deleteClientsCommand);
-                    DatabaseConnector.ExecuteNonQuery(deleteRoleCommand);
-                    DatabaseConnector.ExecuteNonQuery(deleteEventCommand);
+                    await DatabaseConnector.InitializeAsync();
+
+                    // remove event connection from volunteer_event
+                    await DatabaseConnector.Client
+                        .From<Models.VolunteerEvent>()
+                        .Where(v => v.event_ID == event_data.event_id)
+                        .Delete();
+
+                    // remove event connection to event_role
+                    await DatabaseConnector.Client
+                        .From<Models.EventRole>()
+                        .Where(v => v.event_ID == event_data.event_id)
+                        .Delete();
+
+                    // remove event
+                    await DatabaseConnector.Client
+                        .From<Models.Events>()
+                        .Where(v => v.event_ID == event_data.event_id)
+                        .Delete();
 
                     btn.BackgroundColor = Colors.Gray;
                     btn.Text = "Removed";

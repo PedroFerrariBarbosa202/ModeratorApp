@@ -68,6 +68,31 @@
                    x:Name="ClientDataLabel"
                    Style="{StaticResource MainText}"/>
 
+            <Border
+                HeightRequest="200"
+                WidthRequest="200"
+                Stroke="White"
+                StrokeThickness="2"
+                BackgroundColor="#e0d7d7"
+                StrokeShape="RoundRectangle 75"
+                Grid.Row="1" 
+                Grid.Column="1"
+                Grid.RowSpan="2">
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border"
+                         Binding="{Binding Source={x:Reference RootBorder}, Path=Height}"
+                         Value="80">    
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Image x:Name="UserImage"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Aspect="Fill"
+                    Background="Transparent">
+                </Image>
+            </Border>
+
             <!-- Buttons -->
             <HorizontalStackLayout Grid.Row="0" Grid.Column="2"
                                    HorizontalOptions="End"

@@ -1,8 +1,9 @@
-﻿using System.Data;
-using System.Diagnostics;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using ModeratorApp.Services;
+using System.Data;
+using System.Diagnostics;
+using TEST_APP.Services;
 
 namespace ModeratorApp;
 
@@ -14,21 +15,23 @@ public partial class MainPage : ContentPage
         ExecuteQuery();
     }
 
-    private void ExecuteQuery()
+    private async void ExecuteQuery()
     {
-        var command = new SqlCommand("SELECT * FROM Events");
-        DataTable table = DatabaseConnector.ExecuteReadQuery(command);
+        await DatabaseConnector.InitializeAsync();
+        var response = await DatabaseConnector.Client
+          .From<Models.Events>()
+          .Get();
 
-        foreach (DataRow row in table.Rows)
+        foreach (Models.Events row in response.Models)
         {
             var event_data = new CardManager.EventData {
-                event_id = Convert.ToInt32(row["event_id"]),
-                name = row["name"].ToString() ?? "None",
-                description = row["description"].ToString() ?? "None",
-                date = row["date"].ToString() ?? "None",
-                time_begin = row["time_begin"].ToString() ?? "None",
-                time_end = row["time_end"].ToString() ?? "None",
-                link = row["link"].ToString() ?? "None",
+                event_id = row.event_ID,
+                name = row.name,
+                description = row.description,
+                date = row.date.ToString(),
+                time_begin = row.time_begin.ToString(),
+                time_end = row.time_begin.ToString(),
+                link = row.link,
                 color = GetRandomColor().ToHex()
             };
 

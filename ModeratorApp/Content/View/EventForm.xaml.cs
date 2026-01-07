@@ -1,9 +1,6 @@
-using System;
-using System.Data;
-using System.Xml.Linq;
-using Microsoft.Data.SqlClient;
-using ModeratorApp.Services;
 using ModeratorApp.Cards;
+using ModeratorApp.Services;
+using TEST_APP.Services;
 
 namespace ModeratorApp;
 
@@ -15,22 +12,23 @@ public partial class EventForm : ContentView
     public EventForm(VerticalStackLayout _layout)
 	{
 		InitializeComponent();
-        InitEventPicker();
+        InitRolePicker();
         layout = _layout;
 	}
 
-    private void InitEventPicker() {
+    private async void InitRolePicker() {
         // clear picker before init
         RolePicker.Items.Clear();
+        await DatabaseConnector.InitializeAsync();
 
-        string query = "SELECT * FROM Roles";
-        var command = new SqlCommand(query);
-        DataTable? table = DatabaseConnector.ExecuteReadQuery(command);
+        var events = await DatabaseConnector.Client
+              .From<Models.Roles>()
+              .Get();
 
-        if (table == null) return;
-        foreach (DataRow row in table.Rows) {
+        if (events == null) return;
+        foreach (Models.Roles row in events.Models) {
             if (row != null) {
-                RolePicker.Items.Add(row["name"].ToString());
+                RolePicker.Items.Add(row.name);
             }
         }
     }
@@ -47,20 +45,22 @@ public partial class EventForm : ContentView
 
     private async void AddEvent(object sender, EventArgs e) {
         // creating event on database
-        string query = @"INSERT INTO Events(name, description, date, time_begin, time_end, link) 
-                        VALUES(@name, @description, @date, @time_begin, @time_end, @link)
-                        SELECT SCOPE_IDENTITY()";
+        // create model for event to add to database
+        var ev_model = new Models.Events{
+            name = NameEntry.Text ?? "None",
+            description = DescriptionEntry.Text ?? "None",
+            date = DateOnly.FromDateTime(DateEntry.Date),
+            time_begin = TimeOnly.FromTimeSpan(TimeBegin.Time),
+            time_end = TimeOnly.FromTimeSpan(TimeEnd.Time),
+            link = LinkEntry.Text ?? "None",
+        };
+        var inserted_event = await DatabaseConnector.Client
+            .From<Models.Events>()
+            .Insert(ev_model);
 
-        var command = new SqlCommand(query);
-        command.Parameters.AddWithValue("@name", NameEntry.Text ?? "None");
-        command.Parameters.AddWithValue("@description", DescriptionEntry.Text ?? "None");
-        command.Parameters.AddWithValue("@date", DateEntry.Date.ToString() ?? "None");
-        command.Parameters.AddWithValue("@time_begin", TimeBegin.Time.ToString() ?? "None");
-        command.Parameters.AddWithValue("@time_end", TimeEnd.Time.ToString() ?? "None");
-        command.Parameters.AddWithValue("@link", LinkEntry.Text ?? "None");
-        int? event_id = Convert.ToInt32(DatabaseConnector.ExecuteScalarQuery(command));
+        var ev = inserted_event.Models.First();
 
-        if (event_id == null) {
+        if (ev == null) {
             await Application.Current.MainPage.DisplayAlert("Commando SQL não reconhecido", "Coloque dados válidos", "Tentar novamente");
             return;
         }
@@ -68,23 +68,31 @@ public partial class EventForm : ContentView
         // connect roles to event
         foreach(var child in RoleStack.Children) {
             if(child is RoleReadCard r_card) {
-                // get role id
-                var roleID_command = new SqlCommand("SELECT role_ID FROM Roles WHERE name = @role_name");
-                roleID_command.Parameters.AddWithValue("@role_name", r_card.RoleName);
-                int? role_id = Convert.ToInt32(DatabaseConnector.ExecuteScalarQuery(roleID_command));
+                // get role with specific name
+                var selected_role = await DatabaseConnector.Client
+                 .From<Models.Roles>()
+                 .Where(v => v.name == r_card.RoleName)
+                 .Single();
 
-                string role_query = @"INSERT INTO Event_Role(event_ID, role_ID, number_limit) 
-                                      VALUES(@event_id, @role_id, @number_limit)";
-                var role_command = new SqlCommand(role_query);
-                role_command.Parameters.AddWithValue("@event_id", event_id.Value);
-                role_command.Parameters.AddWithValue("@role_id", role_id.Value);
-                role_command.Parameters.AddWithValue("@number_limit", r_card.num_limit);
+                if (selected_role == null)
+                    continue;
 
-                DatabaseConnector.ExecuteNonQuery(role_command);
+                // create model to insert into event_roles
+                var ev_role_model = new Models.EventRole {
+                    event_ID = ev.event_ID,
+                    role_ID = selected_role.role_ID,
+                    number_limit = r_card.num_limit,
+                };
+
+                // insert model
+                await DatabaseConnector.Client
+                  .From<Models.EventRole>()
+                  .Insert(ev_role_model);
             }
         }
+
         var event_data = new CardManager.EventData {
-            event_id = event_id.Value,
+            event_id = ev.event_ID,
             name = NameEntry.Text ?? "None",
             description = DescriptionEntry.Text ?? "None",
             date = DateEntry.Date.ToString() ?? "None",

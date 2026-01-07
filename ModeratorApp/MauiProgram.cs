@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using TEST_APP.Services;
 
 namespace ModeratorApp
 {
@@ -18,7 +19,6 @@ namespace ModeratorApp
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
             return builder.Build();
         }
     }
