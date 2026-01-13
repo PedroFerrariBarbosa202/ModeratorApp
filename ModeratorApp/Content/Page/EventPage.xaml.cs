@@ -65,7 +65,7 @@ public partial class EventPage : ContentPage {
                         age = volunteer.age,
                         email = volunteer.email,
                         color = CardManager.GetRandomColor().ToHex(),
-                        user_img = volunteer.user_img,
+                        user_img = volunteer.user_img == null ? new byte[0] : Convert.FromBase64String(volunteer.user_img)
                     };
                     ClientCard client_card = CardManager.add_client(client_data, ev_data, ClientStackLayout);
                     seen_volunteers.Add(client_name);

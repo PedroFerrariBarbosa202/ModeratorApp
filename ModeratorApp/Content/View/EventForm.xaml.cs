@@ -1,4 +1,6 @@
+using Microsoft.Windows.AppNotifications;
 using ModeratorApp.Cards;
+using ModeratorApp.Models;
 using ModeratorApp.Services;
 using TEST_APP.Services;
 
@@ -106,6 +108,13 @@ public partial class EventForm : ContentView
         if (this.Parent is Layout parentLayout) {
             parentLayout.Children.Remove(this);
         }
+
+        await DatabaseConnector.Client
+        .From<Models.Notifications>()
+        .Insert(new Models.Notifications {
+            title = "Atualização importante",
+            message = $"Um novo evento foi adicionado: {NameEntry.Text}!",
+        });
     }
     private void OnCloseClicked(object sender, EventArgs e) {
         if (this.Parent is Layout parentLayout) {

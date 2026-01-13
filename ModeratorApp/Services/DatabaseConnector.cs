@@ -23,15 +23,5 @@ namespace TEST_APP.Services {
             Client = new Client(url, anonKey, options);
             await Client.InitializeAsync();
         }
-
-        public static async Task<List<T>> GetTable<T>()
-            where T : BaseModel, new() {
-            await InitializeAsync();
-            var result = await Client
-                .From<T>()
-                .Get();
-
-            return result.Models;
-        }
     }
 }

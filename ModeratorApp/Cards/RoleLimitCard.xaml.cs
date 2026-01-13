@@ -34,9 +34,14 @@ public partial class RoleLimitCard : ContentView {
         RoleName = role_data.name;
     }
 
-    private void OnCloseClicked(object sender, EventArgs e) {
+    private async void OnCloseClicked(object sender, EventArgs e) {
         if (this.Parent is Layout parentLayout) {
             parentLayout.Children.Remove(this);
+            await DatabaseConnector.Client
+              .From<Models.EventRole>()
+              .Where(v => v.role_ID == role_data.role_id)
+              .Where(v => v.event_ID == event_data.event_id)
+              .Delete();
         }
     }
 }

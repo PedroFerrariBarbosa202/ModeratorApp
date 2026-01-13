@@ -37,6 +37,9 @@ public partial class MainPage : ContentPage
 
             CardManager.add_event(event_data, EventStackLayout);
         }
+
+        // change "Carregando..." label
+        TopLabel.Text = "Eventos Disponíveis:";
     }
 
     private Color GetRandomColor()

@@ -20,6 +20,6 @@ namespace ModeratorApp.Models {
             public int age { get; set; }
 
             [Column("user_img")]
-            public byte[] user_img { get; set; }
+            public string user_img { get; set; }
     }
 }

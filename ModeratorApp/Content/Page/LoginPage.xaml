@@ -24,7 +24,7 @@
             WidthRequest="300"
             BackgroundColor="White"/>
 
-        <Button Text="ENTER"
+        <Button Text="ENTRAR"
                 HorizontalOptions="Center" 
                 VerticalOptions="Center"
                 WidthRequest="300"

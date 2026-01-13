@@ -9,7 +9,8 @@
     <ScrollView>
         <Grid x:Name="MainGrid">
             <VerticalStackLayout x:Name="EventStackLayout" Padding="10">
-                <Label Text="Eventos disponíveis:"
+                <Label x:Name="TopLabel"
+                       Text="Carregando..."
                        HorizontalOptions="Center"
                        FontAttributes="Bold"
                        FontSize="30"

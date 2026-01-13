@@ -19,9 +19,9 @@ public partial class ClientCard : ContentView {
 
         BindingContext = c_data;
         ClientDataLabel.Text = @$"Nome: {client_data.name}
-Idade: {client_data.age}
-Email: {client_data.email}";
-        //UserImage.Source = ImageSource.FromStream(() => new MemoryStream(c_data.user_img));
+        Idade: {client_data.age}
+        Email: {client_data.email}";
+        UserImage.Source = ImageSource.FromStream(() => new MemoryStream(c_data.user_img));
     }
 
     public VerticalStackLayout RoleStackLayout => RoleStack;
