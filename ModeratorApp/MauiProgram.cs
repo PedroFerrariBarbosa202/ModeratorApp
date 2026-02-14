@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using TEST_APP.Services;
 
 namespace ModeratorApp
 {
@@ -15,9 +14,8 @@ namespace ModeratorApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             return builder.Build();
         }

@@ -17,30 +17,34 @@ public partial class MainPage : ContentPage
 
     private async void ExecuteQuery()
     {
-        await DatabaseConnector.InitializeAsync();
-        var response = await DatabaseConnector.Client
-          .From<Models.Events>()
-          .Get();
+        try {
+            await DatabaseConnector.InitializeAsync();
+            var response = await DatabaseConnector.Client
+              .From<Models.Events>()
+              .Get();
 
-        foreach (Models.Events row in response.Models)
-        {
-            var event_data = new CardManager.EventData {
-                event_id = row.event_ID,
-                name = row.name,
-                description = row.description,
-                date = row.date.ToString(),
-                time_begin = row.time_begin.ToString(),
-                time_end = row.time_begin.ToString(),
-                link = row.link,
-                color = GetRandomColor().ToHex()
-            };
+            foreach (Models.Events row in response.Models) {
+                var event_data = new CardManager.EventData {
+                    event_id = row.event_ID,
+                    name = row.name,
+                    description = row.description,
+                    date = row.date.ToString(),
+                    time_begin = row.time_begin.ToString(),
+                    time_end = row.time_begin.ToString(),
+                    link = row.link,
+                    color = GetRandomColor().ToHex()
+                };
 
-            CardManager.add_event(event_data, EventStackLayout);
-        }
+                CardManager.add_event(event_data, EventStackLayout);
+            }
 
-        // change "Carregando..." label
-        TopLabel.Text = "Eventos Disponíveis:";
+            // change "Carregando..." label
+            TopLabel.Text = "Eventos Disponíveis:";
+            }catch(Exception ex){
+                await DisplayAlert("Erro detectado", ex.Message, "Continuar");
+            }
     }
+        
 
     private Color GetRandomColor()
     {

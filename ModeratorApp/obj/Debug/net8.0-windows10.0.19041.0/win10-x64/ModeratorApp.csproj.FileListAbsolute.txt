@@ -519,3 +519,7 @@ C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.
 C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Supabase.Storage.dll
 C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\System.Reactive.dll
 C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Websocket.Client.dll
+C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\MauiMaterialAssets.ttf
+C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\MauiMaterialAssets.ttf
+C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\dummyappimage.scale-100.png
+C:\Users\Usuario\OneDrive\Desktop\Apps\ModeratorApp\ModeratorApp\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dummyappimage.scale-100.png

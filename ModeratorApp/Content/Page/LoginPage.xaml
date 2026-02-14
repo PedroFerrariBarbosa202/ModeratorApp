@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ModeratorApp.LoginPage"
              Title="LoginPage"
+             Shell.FlyoutBehavior="Disabled"
              BackgroundColor="#262626">
     
     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">

@@ -3,21 +3,64 @@
     x:Class="ModeratorApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ModeratorApp"
-    Shell.FlyoutBehavior="Flyout"
-    Title="ModeratorApp">
+    xmlns:page="clr-namespace:ModeratorApp">
+    
+    <ShellContent
+        Route="LoginPage"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate page:LoginPage}" />
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
-    <ShellContent
-        Title="Main"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    <ShellContent
-        Title="Events"
-        ContentTemplate="{DataTemplate local:EventPage}"
-        Route="EventPage" />
+        Route="EntrancePage"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate page:EntrancePage}" />
 
+    <ShellContent
+        Route="MainPage"
+        ContentTemplate="{DataTemplate page:MainPage}"  
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent
+        Route="EventPage"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate page:EventPage}" />
+
+    <ShellContent
+        Route="SolicitationPage"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate page:SolicitationPage}" />
+
+    <ShellContent
+        Route="NewsPage"
+        ContentTemplate="{DataTemplate page:NewsPage}" />
+
+    <ShellContent
+        Route="ActivityPage"
+        Title="Atividade"
+        ContentTemplate="{DataTemplate page:ActivityPage}" />
+
+    <FlyoutItem Title="Solicitações" Icon="seta_cima.png">
+        <ShellContent ContentTemplate="{DataTemplate page:SolicitationPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Eventos" Icon="seta_cima.png">
+        <ShellContent ContentTemplate="{DataTemplate page:MainPage}" />
+    </FlyoutItem>
+
+    
+    <Shell.FlyoutHeader>
+        <Grid Padding="20" BackgroundColor="#2A2A2A">
+            <VerticalStackLayout Spacing="8">
+                <Label Text="MODERADOR" FontSize="20" TextColor="White"/>
+                <Label Text="Conta Verificada" FontSize="16" TextColor="Gray"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Grid Padding="16">
+            <Label Text="Version 1.0"
+               FontSize="12"/>
+        </Grid>
+    </Shell.FlyoutFooter>
 </Shell>

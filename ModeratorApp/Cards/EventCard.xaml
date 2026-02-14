@@ -13,13 +13,6 @@
             <Setter Property="Margin" Value="0,-20,0,0"/>
         </Style>
 
-        <Style x:Key="BorderStyle" TargetType="Border">
-            <Setter Property="Stroke" Value="Black"/>
-            <Setter Property="StrokeThickness" Value="2"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="HeightRequest" Value="110"/>
-        </Style>
-
         <Style x:Key="MainText" TargetType="Label">
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="30"/>
@@ -32,18 +25,25 @@
     </ContentView.Resources>
 
     <Border x:Name="RootBorder"
-        Style="{StaticResource BorderStyle}"
         AutomationId="{Binding name}"
-        BackgroundColor="{Binding color}">
+        Stroke="{Binding color_fromHex}"
+        StrokeThickness="3"
+        BackgroundColor="#333333">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20" />
+        </Border.StrokeShape>
 
         <VerticalStackLayout>
             <Label HorizontalOptions="Start"
                    Style="{StaticResource MainText}"
-                   Text="{Binding name}"/>
+                   Text="{Binding name}"
+                   Margin="20,10,0,0"/>
             <Label HorizontalOptions="Start"
                    VerticalOptions="End"
                    Style="{StaticResource DateText}"
-                   Text="{Binding date_time}"/>
+                   Text="{Binding date}"
+                   Margin="20,0,0,0"/>
             <HorizontalStackLayout Grid.Row="1"
                        HorizontalOptions="End"
                        VerticalOptions="End"

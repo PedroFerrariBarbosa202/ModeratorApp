@@ -1,4 +1,5 @@
 FluentUI.cs
+MauiMaterialAssets.ttf
 OpenSans-Regular.ttf
 OpenSans-Semibold.ttf
 appicon.ico
@@ -52,6 +53,7 @@ dotnet_bot.scale-125.png
 dotnet_bot.scale-150.png
 dotnet_bot.scale-200.png
 dotnet_bot.scale-400.png
+dummyappimage.scale-100.png
 seta_baixo.scale-100.png
 seta_cima.scale-100.png
 trash.scale-100.png

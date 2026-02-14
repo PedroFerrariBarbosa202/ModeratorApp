@@ -21,5 +21,11 @@ namespace ModeratorApp.Models {
 
             [Column("user_img")]
             public string user_img { get; set; }
+
+        [Column("is_validated")]
+        public bool is_validated { get; set; } = false;
+
+        [Column("solicitation_seen")]
+        public bool solicitation_seen { get; set; } = false;
     }
 }

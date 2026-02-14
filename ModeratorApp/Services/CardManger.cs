@@ -16,6 +16,8 @@ namespace ModeratorApp.Services {
             public string time_end { get; set; }
             public string link { get; set; }
             public string color { get; set; }
+
+            public Color color_fromHex => Color.FromArgb(color);
         }
 
         public struct ClientData {
@@ -23,6 +25,7 @@ namespace ModeratorApp.Services {
             public string name { get; set; }
             public int age { get; set; }
             public string email { get; set; }
+            public string password { get; set; }
             public string color { get; set; }
             public byte[] user_img { get; set; }
         }
@@ -31,6 +34,12 @@ namespace ModeratorApp.Services {
             public int role_id { get; set; }
             public string name { get; set; }
             public string color { get; set; }
+        }
+
+        public class TagData {
+            public int tag_id { get; set; }
+            public string name { get; set; }
+            public Color color { get; set; }
         }
 
         public static EventCard add_event(EventData e_data, Layout stackLayout) {
