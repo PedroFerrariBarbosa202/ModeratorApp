@@ -3,17 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ModeratorApp.NewsPage"
              xmlns:card="clr-namespace:ModeratorApp.Cards"
+             xmlns:view="clr-namespace:ModeratorApp.Content.View"
              BackgroundColor="#262626"
              Title="NewsPage">
-    <ScrollView>
-        <VerticalStackLayout VerticalOptions="Start" HorizontalOptions="Center" WidthRequest="500">
-            <Label 
-                Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+    <Grid x:Name="ContentGrid">
+        <Button x:Name="AddEventButton"
+                BackgroundColor="#333333"
+                Text="Adicionar Notícia"
+                WidthRequest="150"
+                HeightRequest="60"
+                TextColor="White"
+                FontSize="15"
+                BorderWidth="2"
+                BorderColor="Green"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Margin="0,20,30,0"
+                Clicked="OnOpenNewsFormClicked"
+                ZIndex="999"/>
+        <ScrollView>
+            <VerticalStackLayout x:Name="NewsStack"
+                                 VerticalOptions="Start" 
+                                 HorizontalOptions="Fill">
 
-            <card:NewsCard/>
-            <card:NewsCard/>
-        </VerticalStackLayout>
-    </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

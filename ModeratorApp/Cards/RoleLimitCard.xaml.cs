@@ -6,11 +6,11 @@ using TEST_APP.Services;
 namespace ModeratorApp.Cards;
 
 public partial class RoleLimitCard : ContentView {
-    private CardManager.RoleData role_data;
-    private CardManager.EventData event_data;
+    private Models.Roles role_data;
+    private Models.Events event_data;
     public string RoleName { get; private set; }
 
-    public RoleLimitCard(CardManager.RoleData _role_data, CardManager.EventData _event_data) {
+    public RoleLimitCard(Models.Roles _role_data, Models.Events _event_data) {
         InitializeComponent();
         role_data = _role_data;
         event_data = _event_data;
@@ -23,14 +23,14 @@ public partial class RoleLimitCard : ContentView {
         // get role limit
         var role = await DatabaseConnector.Client
           .From<Models.EventRole>()
-          .Where(v => v.role_ID == role_data.role_id)
-          .Where(v => v.event_ID == event_data.event_id)
+          .Where(v => v.role_ID == role_data.role_ID)
+          .Where(v => v.event_ID == event_data.event_ID)
           .Single();
 
         if (role == null)
             return;
 
-        NumLimitLabel.Text = $"Vagas disponíveis: {role.role_ID}";
+        NumLimitLabel.Text = $"Vagas disponíveis: {role.number_limit}";
         RoleName = role_data.name;
     }
 
@@ -39,8 +39,8 @@ public partial class RoleLimitCard : ContentView {
             parentLayout.Children.Remove(this);
             await DatabaseConnector.Client
               .From<Models.EventRole>()
-              .Where(v => v.role_ID == role_data.role_id)
-              .Where(v => v.event_ID == event_data.event_id)
+              .Where(v => v.role_ID == role_data.role_ID)
+              .Where(v => v.event_ID == event_data.event_ID)
               .Delete();
         }
     }

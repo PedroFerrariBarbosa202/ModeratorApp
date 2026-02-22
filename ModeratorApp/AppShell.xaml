@@ -16,11 +16,6 @@
         ContentTemplate="{DataTemplate page:EntrancePage}" />
 
     <ShellContent
-        Route="MainPage"
-        ContentTemplate="{DataTemplate page:MainPage}"  
-        FlyoutItemIsVisible="False"/>
-
-    <ShellContent
         Route="EventPage"
         FlyoutItemIsVisible="False"
         ContentTemplate="{DataTemplate page:EventPage}" />
@@ -31,8 +26,19 @@
         ContentTemplate="{DataTemplate page:SolicitationPage}" />
 
     <ShellContent
+        Route="MainPage"
+        Title="Estatísticas"
+        ContentTemplate="{DataTemplate page:EntrancePage}" />
+
+    <ShellContent
         Route="NewsPage"
+        Title="Notícias"
         ContentTemplate="{DataTemplate page:NewsPage}" />
+    
+    <ShellContent
+        Route="UserAccounts"
+        Title="Contas Vinculadas"
+        ContentTemplate="{DataTemplate page:UserAccountsPage}" />
 
     <ShellContent
         Route="ActivityPage"

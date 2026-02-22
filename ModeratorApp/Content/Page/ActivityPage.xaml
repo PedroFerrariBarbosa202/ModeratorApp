@@ -6,11 +6,12 @@
              BackgroundColor="#262626"
              Title="ActivityPage">
     <Grid x:Name="ContentGrid">
-        <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center"
-                             Spacing="20">
+        <ScrollView>
+            <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center">
             <calendar:CalendarView HorizontalOptions="Center"
-            VerticalOptions="Center"/>
+                                   VerticalOptions="Center"/>
         </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>

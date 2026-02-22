@@ -1,47 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ModeratorApp.Content.Calendar.CalendarView">
+             x:Class="ModeratorApp.Content.Calendar.CalendarView"
+             xmlns:charts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls">
+    
+
     <VerticalStackLayout Spacing="20">
         <HorizontalStackLayout VerticalOptions="Start" 
-                       HorizontalOptions="End"
-                       Spacing="20"
-                       Margin="0,30,30,0">
+                           HorizontalOptions="End"
+                           Spacing="20"
+                           Margin="0,30,30,0">
             <VerticalStackLayout>
                 <Label Text="Usuário" 
-               TextColor="White" 
-               FontSize="15" 
-               FontAttributes="Bold"/>
+                   TextColor="White" 
+                   FontSize="15" 
+                   FontAttributes="Bold"/>
                 <Picker x:Name="CalendarUserPicker"
-                    BackgroundColor="White"
-                    WidthRequest="150"
-                    SelectedIndexChanged="OnLoaded"/>
+                        BackgroundColor="White"
+                        WidthRequest="150"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout>
                 <Label Text="Mês" 
-               TextColor="White" 
-               FontSize="15" 
-               FontAttributes="Bold"/>
+                   TextColor="White" 
+                   FontSize="15" 
+                   FontAttributes="Bold"/>
                 <DatePicker x:Name="CalendarDatePicker"
-                    BackgroundColor="White"
-                    WidthRequest="150"
-                    Format="MMMM yyyy"
-                    DateSelected="OnDateChanged"/>
+                        BackgroundColor="White"
+                        WidthRequest="150"
+                        Format="MMMM yyyy"/>
             </VerticalStackLayout>
+
+            <Button Text="Procurar" 
+                        WidthRequest="100"
+                        HeightRequest="50"
+                        Clicked="UpdateCalendar"/>
+
+            <Button Text="Gerar Relatório"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        HeightRequest="50"
+                        Clicked="CreateReport"/>
         </HorizontalStackLayout>
-        
+
         <Label x:Name="MonthLabel"
                TextColor="White"
                FontAttributes="Bold"
                FontSize="25"
                HorizontalOptions="Start"/>
-        
+
         <Grid x:Name="CalendarGrid"
               RowDefinitions="Auto"
               ColumnDefinitions="Auto"
               RowSpacing="5"
               ColumnSpacing="5">
         </Grid>
+
+        <Label x:Name="GraphShowLabel"
+               Text="Mostrar Gráfico"
+               TextColor="CadetBlue"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               FontSize="16"
+               FontAttributes="Bold"
+               TextDecorations="Underline">
+            
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnGraphicShow" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <charts:ChartView x:Name="ActivityChart"
+                          HeightRequest="250"
+                          Margin="0,30,0,50"
+                          IsVisible="False"/>
     </VerticalStackLayout>
 </ContentView>

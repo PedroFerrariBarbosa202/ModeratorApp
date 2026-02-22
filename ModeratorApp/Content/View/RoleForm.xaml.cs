@@ -1,9 +1,9 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Storage;
+using ModeratorApp.Cards;
 using ModeratorApp.Services;
 using System.Data;
 using TEST_APP.Services;
-using static ModeratorApp.Services.CardManager;
 
 namespace ModeratorApp;
 
@@ -26,13 +26,8 @@ public partial class RoleForm : ContentView
             .Get();
 
         foreach (Models.Roles row in roles.Models) {
-            var role_data = new CardManager.RoleData {
-                role_id = row.role_ID,
-                name = row.name,
-                color = GetRandomColor().ToHex()
-            };
-
-            CardManager.add_role_manage(role_data, RoleStack);
+            var role_manage = new RoleManageCard(row);
+            RoleStack.Children.Add(role_manage);
         }
 	}
 

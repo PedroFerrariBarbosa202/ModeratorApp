@@ -82,6 +82,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.SubRole
 build_metadata.AdditionalFiles.TargetPath = Cards\SubRoleShowCard.xaml
 build_metadata.AdditionalFiles.RelativePath = Cards\SubRoleShowCard.xaml
 
+[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/UserAccountCard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.UserAccountCard.xaml
+build_metadata.AdditionalFiles.TargetPath = Cards\UserAccountCard.xaml
+build_metadata.AdditionalFiles.RelativePath = Cards\UserAccountCard.xaml
+
 [C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/Calendar/CalendarDay.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Calendar.CalendarDay.xaml
@@ -142,11 +148,29 @@ build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Page.
 build_metadata.AdditionalFiles.TargetPath = Content\Page\SolicitationPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Content\Page\SolicitationPage.xaml
 
+[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/Page/UserAccountsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.Page.UserAccountsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Content\Page\UserAccountsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Content\Page\UserAccountsPage.xaml
+
+[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/AccountDetailsView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.View.AccountDetailsView.xaml
+build_metadata.AdditionalFiles.TargetPath = Content\View\AccountDetailsView.xaml
+build_metadata.AdditionalFiles.RelativePath = Content\View\AccountDetailsView.xaml
+
 [C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/EventForm.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.View.EventForm.xaml
 build_metadata.AdditionalFiles.TargetPath = Content\View\EventForm.xaml
 build_metadata.AdditionalFiles.RelativePath = Content\View\EventForm.xaml
+
+[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/NewsForm.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Content.View.NewsForm.xaml
+build_metadata.AdditionalFiles.TargetPath = Content\View\NewsForm.xaml
+build_metadata.AdditionalFiles.RelativePath = Content\View\NewsForm.xaml
 
 [C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Content/View/RoleForm.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

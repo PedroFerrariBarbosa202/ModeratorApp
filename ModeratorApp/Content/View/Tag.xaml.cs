@@ -1,17 +1,16 @@
-using ModeratorApp.Services;
 
 namespace ModeratorApp.Content.View;
 
 public partial class Tag : ContentView
 {
-	CardManager.TagData data;
+	Models.Sector data;
 
-    public Tag(CardManager.TagData _data)
+    public Tag(Models.Sector _data)
 	{
 		data = _data;
 		InitializeComponent();
 
         NameTag.Text = data.name;
-        Border.Stroke = data.color;
+        Border.Stroke = Color.FromArgb(data.color);
     }
 }

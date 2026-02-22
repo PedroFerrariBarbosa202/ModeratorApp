@@ -5,21 +5,11 @@
 
     <!-- STYLE -->
     <ContentView.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Text" Value="Abrir Evento"/>
-            <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="WidthRequest" Value="200"/>
-            <Setter Property="Margin" Value="0,-20,0,0"/>
-        </Style>
-
         <Style x:Key="MainText" TargetType="Label">
-            <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="30"/>
         </Style>
 
         <Style x:Key="DateText" TargetType="Label">
-            <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
     </ContentView.Resources>
@@ -38,24 +28,44 @@
             <Label HorizontalOptions="Start"
                    Style="{StaticResource MainText}"
                    Text="{Binding name}"
+                   TextColor="White"
                    Margin="20,10,0,0"/>
             <Label HorizontalOptions="Start"
                    VerticalOptions="End"
                    Style="{StaticResource DateText}"
+                   TextColor="White"
                    Text="{Binding date}"
                    Margin="20,0,0,0"/>
             <HorizontalStackLayout Grid.Row="1"
                        HorizontalOptions="End"
                        VerticalOptions="End"
                        Spacing="10">
-                <Button Style="{StaticResource ButtonStyle}"
-                        Text="Exibir"
-                        BackgroundColor="Green"
-                        Clicked="ViewEvent"/>
-                <Button Style="{StaticResource ButtonStyle}"
-                        Text="Remove"
-                        BackgroundColor="Red"
-                        Clicked="RemoveEvent"/>
+                <Button HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Clicked="ViewEvent"
+                        FontAttributes="Bold"
+                        BackgroundColor="#474747"
+                        Text="Abrir"
+                        BorderColor="Green"
+                        BorderWidth="2"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        WidthRequest="160"
+                        HeightRequest="50"
+                        Margin="0,0,10,0"/>
+                <Button Text="Remover"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Clicked="RemoveEvent"
+                        FontAttributes="Bold"
+                        BackgroundColor="#474747"
+                        BorderColor="Red"
+                        BorderWidth="2"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        WidthRequest="160"
+                        HeightRequest="50"
+                        Margin="0,0,30,10"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Border>

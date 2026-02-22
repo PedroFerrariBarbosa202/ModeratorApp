@@ -1,5 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using ModeratorApp.Cards;
+using ModeratorApp.Content;
 using ModeratorApp.Services;
 using System.Data;
 using System.Diagnostics;
@@ -17,40 +19,33 @@ public partial class MainPage : ContentPage
 
     private async void ExecuteQuery()
     {
+        Loading loading_page = new Loading();
+
         try {
+            // add loading screen
+            ContentGrid.Children.Add(loading_page);
+
             await DatabaseConnector.InitializeAsync();
             var response = await DatabaseConnector.Client
               .From<Models.Events>()
               .Get();
 
             foreach (Models.Events row in response.Models) {
-                var event_data = new CardManager.EventData {
-                    event_id = row.event_ID,
-                    name = row.name,
-                    description = row.description,
-                    date = row.date.ToString(),
-                    time_begin = row.time_begin.ToString(),
-                    time_end = row.time_begin.ToString(),
-                    link = row.link,
-                    color = GetRandomColor().ToHex()
-                };
-
-                CardManager.add_event(event_data, EventStackLayout);
+                EventCard event_card = new EventCard(row);
+                EventStackLayout.Children.Add(event_card);
             }
 
-            // change "Carregando..." label
-            TopLabel.Text = "Eventos Disponíveis:";
-            }catch(Exception ex){
-                await DisplayAlert("Erro detectado", ex.Message, "Continuar");
-            }
-    }
-        
+            // remove loading
+            ContentGrid.Children.Remove(loading_page);
+        }
+        catch(Exception ex){
+            // remove loading
+            ContentGrid.Children.Remove(loading_page);
 
-    private Color GetRandomColor()
-    {
-        var random = new Random();
-        return Color.FromRgb(random.Next(100, 256), random.Next(100, 256), random.Next(100, 256));
+            await DisplayAlert("Erro detectado", ex.Message, "Continuar");
+        }
     }
+       
     private async void AddEvent(object sender, EventArgs e) {
         var button = (Button)sender;
 

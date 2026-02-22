@@ -3,25 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ModeratorApp.Cards.NewsCard">
     <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
-
-        <Image Source="dummyappimage.png"
+        <Image x:Name="ImageView"
+               Source="dummyappimage.png"
                WidthRequest="500"
                HeightRequest="200"/>
 
-        <Label 
+        <Label x:Name="TitleEntry"
             Text="Lançamento do novo aplicativo de gerenciamento."
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             TextColor="White"
             FontAttributes="Bold"
             FontSize="18"
+            WidthRequest="500"
             HorizontalTextAlignment="Center"
             Margin="0,20,0,0"/>
-        <Label 
+        <Label x:Name="ContentEntry"
             Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             TextColor="White"
+            WidthRequest="500"
             LineBreakMode="TailTruncation" 
             FontSize="15"/>
 
@@ -33,7 +35,8 @@
                     TextColor="White"
                     FontSize="15"
                     BorderWidth="2"
-                    BorderColor="Green"/>
+                    BorderColor="Green"
+                    Clicked="OnEditNewsClicked"/>
             <Button x:Name="ManageRoleButton"
                     BackgroundColor="#333333"
                     Text="Remover"
@@ -41,7 +44,8 @@
                     TextColor="White"
                     FontSize="15"
                     BorderWidth="2"
-                    BorderColor="Red"/>
+                    BorderColor="Red"
+                    Clicked="OnRemoveNewsClicked"/>
         </HorizontalStackLayout>
 
         <!-- White Line -->
@@ -51,6 +55,7 @@
                  HorizontalOptions="Fill" 
                  VerticalOptions="Center"
                  Stroke="White"
+                 WidthRequest="600"
                  Margin="0,30,0,0">
         </Border>
     </VerticalStackLayout>

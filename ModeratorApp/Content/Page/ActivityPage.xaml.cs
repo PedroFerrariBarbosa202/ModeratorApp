@@ -1,4 +1,6 @@
+using Microcharts;
 using ModeratorApp.Content;
+using SkiaSharp;
 
 namespace ModeratorApp;
 
@@ -8,7 +10,7 @@ public partial class ActivityPage : ContentPage
 	public ActivityPage()
 	{
 		InitializeComponent();
-	}
+    }
 
 	public void AddLoading() {
         Loading loading_page = new Loading();

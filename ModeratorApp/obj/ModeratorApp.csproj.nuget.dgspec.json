@@ -52,6 +52,10 @@
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "dependencies": {
+            "Microcharts.Maui": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[6.1.1, )"
@@ -71,6 +75,14 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.4.0, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2026.2.0, )"
+            },
+            "SkiaSharp.Views.Maui.Controls": {
+              "target": "Package",
+              "version": "[3.119.2, )"
             },
             "Supabase": {
               "target": "Package",

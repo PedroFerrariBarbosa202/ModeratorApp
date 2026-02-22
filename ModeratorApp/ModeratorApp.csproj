@@ -67,10 +67,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microcharts.Maui" Version="1.0.1" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 		<PackageReference Include="MySqlConnector" Version="2.4.0" />
+		<PackageReference Include="QuestPDF" Version="2026.2.0" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.2" />
 		<PackageReference Include="Supabase" Version="1.1.1" />
 	</ItemGroup>
 
@@ -86,6 +89,9 @@
 	  </Compile>
 	  <Compile Update="Content\Page\EventPage.xaml.cs">
 	    <DependentUpon>EventPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Content\View\NewsForm.xaml.cs">
+	    <DependentUpon>NewsForm.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -111,6 +117,9 @@
 	  <MauiXaml Update="Cards\RoleManageCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Cards\UserAccountCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Content\Calendar\CalendarDay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -132,6 +141,12 @@
 	  <MauiXaml Update="Content\Page\SolicitationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Content\Page\UserAccountsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Content\View\AccountDetailsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Content\View\EventForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -144,6 +159,9 @@
 	  <MauiXaml Update="Content\Page\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Content\View\NewsForm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Content\View\RoleForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -154,6 +172,14 @@
 
 	<ItemGroup>
 	  <PRIResource Remove="Content\NovaPasta1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Cards\SectorCard.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Cards\SectorCard.xaml" />
 	</ItemGroup>
 
 </Project>

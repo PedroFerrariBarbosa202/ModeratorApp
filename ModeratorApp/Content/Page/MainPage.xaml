@@ -6,34 +6,30 @@
              Title="MainPage"
              BackgroundColor="#262626">
 
-    <ScrollView>
-        <Grid x:Name="MainGrid">
-            <VerticalStackLayout x:Name="EventStackLayout" Padding="10" Spacing="20">
-                <Label x:Name="TopLabel"
-                       Text="Carregando..."
-                       HorizontalOptions="Center"
-                       FontAttributes="Bold"
-                       FontSize="30"
-                       TextColor="White" />
-                <HorizontalStackLayout  VerticalOptions="Start" HorizontalOptions="End" Spacing="10">
-                    <Button x:Name="AddEventButton"
-                            BackgroundColor="Green"
-                            Text="Adicionar Evento"
-                            TextColor="White"
-                            FontSize="15"
-                            BorderWidth="2"
-                            BorderColor="White"
-                            Clicked="AddEvent"/>
-                    <Button x:Name="ManageRoleButton"
-                            BackgroundColor="Red"
-                            Text="Gerenciar papéis"
-                            TextColor="White"
-                            FontSize="15"
-                            BorderWidth="2"
-                            BorderColor="White"
-                            Clicked="ManageRole"/>
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Grid>
-    </ScrollView>
+    <Grid x:Name="ContentGrid">
+        <ScrollView>
+            <Grid x:Name="MainGrid">
+                <VerticalStackLayout x:Name="EventStackLayout" Padding="10" Spacing="20">
+                    <HorizontalStackLayout  VerticalOptions="Start" HorizontalOptions="End" Spacing="10">
+                        <Button x:Name="AddEventButton"
+                                BackgroundColor="Green"
+                                Text="Adicionar Evento"
+                                TextColor="White"
+                                FontSize="15"
+                                BorderWidth="2"
+                                BorderColor="White"
+                                Clicked="AddEvent"/>
+                        <Button x:Name="ManageRoleButton"
+                                BackgroundColor="Red"
+                                Text="Gerenciar papéis"
+                                TextColor="White"
+                                FontSize="15"
+                                BorderWidth="2"
+                                BorderColor="White"
+                                Clicked="ManageRole"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>

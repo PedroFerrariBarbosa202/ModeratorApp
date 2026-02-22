@@ -5,9 +5,9 @@ namespace ModeratorApp.Cards;
 
 public partial class RoleManageCard : ContentView
 {
-    CardManager.RoleData role_data;
+    Models.Roles role_data;
 
-    public RoleManageCard(CardManager.RoleData _role_data)
+    public RoleManageCard(Models.Roles _role_data)
 	{
         InitializeComponent();
         role_data = _role_data;

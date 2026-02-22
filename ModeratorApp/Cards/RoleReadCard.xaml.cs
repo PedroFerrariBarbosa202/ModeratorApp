@@ -4,10 +4,10 @@ using System.Diagnostics;
 namespace ModeratorApp.Cards;
 
 public partial class RoleReadCard : ContentView {
-    private CardManager.RoleData role_data;
+    private Models.Roles role_data;
     public string RoleName { get; private set; }
 
-    public RoleReadCard(CardManager.RoleData _role_data) {
+    public RoleReadCard(Models.Roles _role_data) {
         InitializeComponent();
         role_data = _role_data;
         BindingContext = role_data;

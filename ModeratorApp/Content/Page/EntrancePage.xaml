@@ -7,7 +7,6 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
-
             <!-- TÍTULO -->
             <Label 
                 Text="Bem-vindo de volta!"
@@ -43,7 +42,6 @@
                   ColumnSpacing="15"
                   RowSpacing="15">
 
-                <!-- Eventos Hoje -->
                 <Frame Grid.Row="0" Grid.Column="0"
                        BackgroundColor="#3A3A3A"
                        CornerRadius="18"
@@ -60,7 +58,6 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Bloqueios -->
                 <Frame Grid.Row="0" Grid.Column="1"
                        BackgroundColor="#3A3A3A"
                        CornerRadius="18"
@@ -77,24 +74,22 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Bloqueios -->
                 <Frame Grid.Row="1" Grid.Column="0"
                        BackgroundColor="#3A3A3A"
                        CornerRadius="18"
                        Padding="15">
-                                <VerticalStackLayout>
-                                    <Label Text="Contas Verificadas"
+                    <VerticalStackLayout>
+                        <Label Text="Contas Verificadas"
                                TextColor="#AAAAAA"
                                FontSize="13"/>
-                                <Label x:Name="VerifiedAccounts"
+                        <Label x:Name="VerifiedAccounts"
                                         Text="Carregando"
                                        TextColor="White"
                                        FontSize="24"
                                        FontAttributes="Bold"/>
                     </VerticalStackLayout>
-                            </Frame>
+                </Frame>
 
-                <!-- Bloqueios -->
                 <Frame Grid.Row="1" Grid.Column="1"
                        BackgroundColor="#3A3A3A"
                        CornerRadius="18"
@@ -111,7 +106,7 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Tempo Monitorado -->
+                <!-- Tempo Monitorado 
                 <Frame Grid.Row="2" Grid.ColumnSpan="2"
                        BackgroundColor="#3A3A3A"
                        CornerRadius="18"
@@ -127,8 +122,8 @@
                         <Label Text="65% do limite diário utilizado"
                                TextColor="#CCCCCC"
                                FontSize="12"/>
-                    </VerticalStackLayout>
-                </Frame>
+                    </VerticalStackLayout> 
+                </Frame>-->
             </Grid>
 
             <!-- AÇÕES RÁPIDAS -->
@@ -150,5 +145,4 @@
                     HeightRequest="50"/>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

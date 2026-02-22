@@ -7,12 +7,12 @@ using System.Diagnostics;
 using TEST_APP.Services;
 
 public partial class ClientCard : ContentView {
-    private CardManager.ClientData client_data;
-    private CardManager.EventData event_data;
+    private Models.Volunteer client_data;
+    private Models.Events event_data;
 
     private bool _isExpanded = false;
 
-    public ClientCard(CardManager.ClientData c_data, CardManager.EventData e_data) {
+    public ClientCard(Models.Volunteer c_data, Models.Events e_data) {
         InitializeComponent();
         client_data = c_data;
         event_data = e_data;
@@ -21,7 +21,7 @@ public partial class ClientCard : ContentView {
         ClientDataLabel.Text = @$"Nome: {client_data.name}
         Idade: {client_data.age}
         Email: {client_data.email}";
-        UserImage.Source = ImageSource.FromStream(() => new MemoryStream(c_data.user_img));
+        UserImage.Source = ImageService.BytesToImageSource(Convert.FromBase64String(c_data.user_img));
     }
 
     public VerticalStackLayout RoleStackLayout => RoleStack;
@@ -39,12 +39,12 @@ public partial class ClientCard : ContentView {
 
     private async void OnRemoveClicked(object sender, EventArgs e) {
         if (sender is Button btn) {
-            if (!event_data.Equals(default(CardManager.EventData)) && btn.BackgroundColor == Colors.Red) {
+            if (!event_data.Equals(default(Models.Events)) && btn.BackgroundColor == Colors.Red) {
                 await DatabaseConnector.InitializeAsync();
                 await DatabaseConnector.Client
                     .From<Models.VolunteerEvent>()
-                    .Where(v => v.volunteer_ID == client_data.client_id)
-                    .Where(v => v.event_ID == event_data.event_id)
+                    .Where(v => v.volunteer_ID == client_data.volunteer_ID)
+                    .Where(v => v.event_ID == event_data.event_ID)
                     .Delete();
 
                 btn.BackgroundColor = Colors.Gray;

@@ -24,16 +24,7 @@ public partial class SolicitationPage : ContentPage
               .Get();
 
             foreach (Models.Volunteer row in response.Models) {
-                var sol_data = new CardManager.ClientData {
-                    client_id = row.volunteer_ID,
-                    name = row.name,
-                    age = row.age,
-                    email = row.email,
-                    password = row.password,
-                    user_img = new byte[0],
-                };
-
-                var card = new SolicitationCard(sol_data);
+                var card = new SolicitationCard(row);
                 SolicitationStack.Children.Add(card);
 
                 // update solicitation so it appears as seen to the user

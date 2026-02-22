@@ -36,13 +36,12 @@ public partial class EventForm : ContentView
     }
 
     private void OnRolePickerChange(object sender, EventArgs e) {
-        var role_data = new CardManager.RoleData {
-            role_id = 1,
+        var role_data = new Models.Roles {
             name = RolePicker.SelectedItem?.ToString() ?? "None",
-            color = GetRandomColor().ToHex()
         };
 
-        CardManager.add_role(role_data, RoleStack);
+        RoleReadCard role_read_card = new RoleReadCard(role_data);
+        RoleStack.Children.Add(role_read_card);
     }
 
     private async void AddEvent(object sender, EventArgs e) {
@@ -93,17 +92,18 @@ public partial class EventForm : ContentView
             }
         }
 
-        var event_data = new CardManager.EventData {
-            event_id = ev.event_ID,
+        var event_data = new Models.Events{
+            event_ID = ev.event_ID,
             name = NameEntry.Text ?? "None",
             description = DescriptionEntry.Text ?? "None",
-            date = DateEntry.Date.ToString() ?? "None",
-            time_begin = TimeBegin.Time.ToString() ?? "None",
-            time_end = TimeEnd.Time.ToString() ?? "None",
+            date = DateOnly.FromDateTime(DateEntry.Date),
+            time_begin = TimeOnly.FromTimeSpan(TimeBegin.Time),
+            time_end = TimeOnly.FromTimeSpan(TimeEnd.Time),
             link = LinkEntry.Text ?? "None", 
-            color = GetRandomColor().ToHex()
         };
-        CardManager.add_event(event_data, layout);
+
+        EventCard ev_card = new EventCard(event_data);
+        layout.Children.Add(ev_card);
 
         if (this.Parent is Layout parentLayout) {
             parentLayout.Children.Remove(this);

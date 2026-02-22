@@ -13,5 +13,8 @@ namespace ModeratorApp.Models {
 
         [Column("created_at")]
         public DateTime created_at { get; set; }
+
+        [Column("finished_at")]
+        public DateTime finished_at { get; set; }
     }
 }

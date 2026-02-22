@@ -1,3 +1,6 @@
+using Microcharts;
+using ModeratorApp.Services;
+using SkiaSharp;
 using TEST_APP.Services;
 
 namespace ModeratorApp;
@@ -8,7 +11,7 @@ public partial class EntrancePage : ContentPage
 	{
 		InitializeComponent();
         InitUI();
-	}
+    }
 
 	async void InitUI() {
         await DatabaseConnector.InitializeAsync();

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ModeratorApp.Content.View.AccountDetailsView"
+             BackgroundColor="Transparent"
+             ZIndex="999">
+
+    <!-- Full-screen dimmed background -->
+    <Grid BackgroundColor="#80000000"
+          HorizontalOptions="Fill"
+          VerticalOptions="Fill">
+
+        <!-- Centered container -->
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="Center"
+              ColumnSpacing="20"
+              Padding="10"
+              MaximumWidthRequest="500"
+              MinimumWidthRequest="300">
+
+
+            <!-- Right Border -->
+            <Border 
+                    Padding="20"
+                    Stroke="White"
+                    StrokeThickness="3"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="#1C1C1C"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill">
+                
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <Grid RowDefinitions="Auto,*,Auto">
+
+                    <!-- Close Button -->
+                    <Button Text="X"
+                            BackgroundColor="Red"
+                            TextColor="White"
+                            CornerRadius="20"
+                            BorderColor="White"
+                            BorderWidth="2"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            ZIndex="999"
+                            Clicked="OnCloseClicked"/>
+
+                        <VerticalStackLayout Spacing="15"
+                                             HorizontalOptions="Fill"
+                                             VerticalOptions="Start"
+                                             Padding="5">
+
+                            <Label Text="Detalhes de Usuário"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="White"
+                                   Margin="0,0,0,20"/>
+
+                            <!-- Entries adapt width automatically -->
+                            <Border WidthRequest="200"
+                                   HeightRequest="200"
+                                    Margin="0,0,0,20">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="100"/>
+                                </Border.StrokeShape>
+
+                                <Image Source="trash.png"/>
+                            </Border>
+
+                            <Label x:Name="NameLabel"
+                                   Text="Nome:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+
+                            <Label x:Name="AgeLabel"
+                                   Text="Idade:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+
+                            <Label x:Name="EmailLabel"
+                                   Text="Email:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+
+                            <Label x:Name="PasswordLabel"
+                                   Text="Senha:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+
+                            <Label Text="Setores:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   Margin="0,30,0,0"/>
+
+                            <VerticalStackLayout x:Name="SectorStack"/>
+
+                            <Button Text="Deletar Conta"
+                                    BackgroundColor="#3A3A3A"
+                                    TextColor="White"
+                                    WidthRequest="150"
+                                    CornerRadius="10"
+                                    BorderWidth="2"
+                                    BorderColor="Red"
+                                    Margin="0,30,0,0"
+                                    Clicked="OnDeleteAccountClicked"/>
+                        </VerticalStackLayout>
+                </Grid>
+                </ScrollView>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentView>

@@ -1,23 +1,23 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using ModeratorApp.Cards;
+using ModeratorApp.Content;
 using ModeratorApp.Services;
 using System.Data;
 using System.Diagnostics;
 using TEST_APP.Services;
-using static ModeratorApp.Services.CardManager;
 
 namespace ModeratorApp;
 
 public partial class EventPage : ContentPage {
-    CardManager.EventData ev_data = new CardManager.EventData();
+    Models.Events ev_data = new Models.Events();
     bool _isOpen = false;
-    public EventPage(CardManager.EventData data) {
+    public EventPage(Models.Events data) {
         InitializeComponent();
         // get data from specific event
         ev_data = data;
 
-        MainText.Text = "Event ID: " + data.event_id.ToString();
+        MainText.Text = "Event ID: " + data.event_ID.ToString();
         DescriptionText.Text = data.description;
         Link.Text = "\nLink: " + data.link;
 
@@ -26,12 +26,14 @@ public partial class EventPage : ContentPage {
     }
 
     private async void ShowClients() {
-        await DatabaseConnector.InitializeAsync();
-        
-        // get 
+        // add loading screen
+        Loading loading_page = new Loading();
+        ContentGrid.Children.Add(loading_page);
+
+        // get all events from Volunteer_event connected to a specific ID
         var response = await DatabaseConnector.Client
              .From<Models.VolunteerEvent>()
-             .Where(v => v.event_ID == ev_data.event_id)
+             .Where(v => v.event_ID == ev_data.event_ID)
              .Get();
 
         HashSet<string> seen_volunteers = new HashSet<string>();
@@ -59,46 +61,52 @@ public partial class EventPage : ContentPage {
                 }
                 else {
                     //if client not in HashSet, add it
-                    var client_data = new CardManager.ClientData {
-                        client_id = volunteer.volunteer_ID,
+                    var client_data = new Models.Volunteer {
+                        volunteer_ID = volunteer.volunteer_ID,
                         name = client_name,
                         age = volunteer.age,
                         email = volunteer.email,
-                        color = CardManager.GetRandomColor().ToHex(),
-                        user_img = volunteer.user_img == null ? new byte[0] : Convert.FromBase64String(volunteer.user_img)
+                        user_img = volunteer.user_img
                     };
-                    ClientCard client_card = CardManager.add_client(client_data, ev_data, ClientStackLayout);
+
+                    // add client card to stack
+                    ClientCard client_card = new ClientCard(client_data, ev_data);
+                    ClientStackLayout.Children.Add(client_card);
+   
                     seen_volunteers.Add(client_name);
 
                     // add role
-                var vol_ev_roles = await DatabaseConnector.Client
-                      .From<Models.VolunteerEvent>()
-                      .Where(v => v.event_ID == ev_data.event_id)
-                      .Where(v => v.volunteer_ID == volunteer.volunteer_ID)
-                      .Get();
+                    var vol_ev_roles = await DatabaseConnector.Client
+                          .From<Models.VolunteerEvent>()
+                          .Where(v => v.event_ID == ev_data.event_ID)
+                          .Where(v => v.volunteer_ID == volunteer.volunteer_ID)
+                          .Get();
 
-                foreach (Models.VolunteerEvent role_row in vol_ev_roles.Models) {
-                    var role = await DatabaseConnector.Client
-                      .From<Models.Roles>()
-                      .Where(v => v.role_ID == role_row.role_ID)
-                      .Single();
+                    foreach (Models.VolunteerEvent role_row in vol_ev_roles.Models) {
+                        var role = await DatabaseConnector.Client
+                          .From<Models.Roles>()
+                          .Where(v => v.role_ID == role_row.role_ID)
+                          .Single();
 
-                    if (role == null)
-                        continue;
+                        if (role == null)
+                            continue;
 
-                    var role_data = new CardManager.RoleData {
-                            role_id = role.role_ID,
-                            name = role.name,
-                            color = CardManager.GetRandomColor().ToHex()
+                        var role_data = new Models.Roles {
+                                role_ID = role.role_ID,
+                                name = role.name,
                         };
+
                         VerticalStackLayout role_stack = client_card.RoleStackLayout;
-                        CardManager.add_sub_role_manage(role_data, ev_data, client_data, role_stack);
+                        var sub_role_card = new SubRoleShowCard(role_data, ev_data, client_data);
+                        role_stack.Children.Add(sub_role_card);
 
                         Debug.WriteLine("Added Role to " + client_name);
                     }
-                
             }
         }
+
+        // remove loading page
+        ContentGrid.Children.Remove(loading_page);
     }
 
     private async void AddRoles() {
@@ -107,7 +115,7 @@ public partial class EventPage : ContentPage {
         // get all role_ids that are associated with a event
         var response = await DatabaseConnector.Client
           .From<Models.EventRole>()
-          .Where(v => v.event_ID == ev_data.event_id)
+          .Where(v => v.event_ID == ev_data.event_ID)
           .Get();
 
         foreach(Models.EventRole row in response.Models) {
@@ -119,12 +127,13 @@ public partial class EventPage : ContentPage {
             
             if(role == null) continue;
 
-            var role_data = new CardManager.RoleData {
-                role_id = role.role_ID,
+            var role_data = new Models.Roles {
+                role_ID = role.role_ID,
                 name = role.name,
-                color = CardManager.GetRandomColor().ToHex()
             };
-            CardManager.add_role_limit(role_data, ev_data, RoleStack);
+
+            RoleLimitCard role_limit = new RoleLimitCard(role_data, ev_data);
+            RoleStack.Children.Add(role_limit);
         }
     }
 

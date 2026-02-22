@@ -7,12 +7,12 @@ using TEST_APP.Services;
 namespace ModeratorApp.Cards;
 
 public partial class SubRoleShowCard : ContentView {
-    private CardManager.RoleData role_data;
-    private CardManager.EventData event_data;
-    private CardManager.ClientData client_data;
+    private Models.Roles role_data;
+    private Models.Events event_data;
+    private Models.Volunteer client_data;
     public string RoleName { get; private set; }
 
-    public SubRoleShowCard(CardManager.RoleData _role_data, CardManager.EventData _event_data, CardManager.ClientData _client_data) {
+    public SubRoleShowCard(Models.Roles _role_data, Models.Events _event_data, Models.Volunteer _client_data) {
         InitializeComponent();
         role_data = _role_data;
         event_data = _event_data;
@@ -25,9 +25,9 @@ public partial class SubRoleShowCard : ContentView {
     private async void SetLabels() {
         var response = await DatabaseConnector.Client
            .From<Models.VolunteerEvent>()
-           .Where(v => v.role_ID == role_data.role_id)
-           .Where(v => v.event_ID == event_data.event_id)
-           .Where(v => v.volunteer_ID == client_data.client_id)
+           .Where(v => v.role_ID == role_data.role_ID)
+           .Where(v => v.event_ID == event_data.event_ID)
+           .Where(v => v.volunteer_ID == client_data.volunteer_ID)
            .Single();
 
         if (response == null) return;

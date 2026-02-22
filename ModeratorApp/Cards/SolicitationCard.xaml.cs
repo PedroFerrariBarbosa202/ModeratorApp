@@ -7,13 +7,12 @@ namespace ModeratorApp.Cards;
 public partial class SolicitationCard : ContentView {
     // client data and the data needed for solicitations are similar,
     // so the same data structure is used
-    CardManager.ClientData data;
-    public SolicitationCard(CardManager.ClientData _data) {
+    Models.Volunteer data;
+    public SolicitationCard(Models.Volunteer _data) {
         data = _data;
         InitializeComponent();
         InitializeFields();
         _ = InitSectors();
-
     }
 
     void InitializeFields() {
@@ -26,7 +25,7 @@ public partial class SolicitationCard : ContentView {
     private async Task InitSectors() {
         var response = await DatabaseConnector.Client
               .From<Models.VolunteerSector>()
-              .Where(v => v.volunteer_ID == data.client_id)
+              .Where(v => v.volunteer_ID == data.volunteer_ID)
               .Get();
 
         foreach (var connection in response.Models) {
@@ -36,10 +35,10 @@ public partial class SolicitationCard : ContentView {
               .Where(v => v.sector_ID == connection.sector_ID)
               .Single();
 
-            var sec_data = new CardManager.TagData {
-                tag_id = sector_response.sector_ID,
+            var sec_data = new Models.Sector {
+                sector_ID = sector_response.sector_ID,
                 name = sector_response.name,
-                color = Color.FromArgb(sector_response.color),
+                color = sector_response.color,
             };
 
             Tag tag = new Tag(sec_data);
@@ -51,7 +50,7 @@ public partial class SolicitationCard : ContentView {
         // verify the account
         await DatabaseConnector.Client
               .From<Models.Volunteer>()
-              .Where(v => v.volunteer_ID == data.client_id)
+              .Where(v => v.volunteer_ID == data.volunteer_ID)
               .Set(x => x.is_validated, true)
               .Update();
 
