@@ -1,6 +1,6 @@
 using ModeratorApp.Cards;
 using ModeratorApp.Content;
-using TEST_APP.Services;
+using ModeratorApp.Services;
 
 namespace ModeratorApp;
 

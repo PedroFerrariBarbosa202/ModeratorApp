@@ -4,7 +4,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Controls;
 using ModeratorApp.Services;
 using System.Diagnostics;
-using TEST_APP.Services;
 
 public partial class ClientCard : ContentView {
     private Models.Volunteer client_data;

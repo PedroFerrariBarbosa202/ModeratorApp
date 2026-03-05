@@ -1,8 +1,5 @@
-using Microsoft.Windows.AppNotifications;
 using ModeratorApp.Cards;
-using ModeratorApp.Models;
 using ModeratorApp.Services;
-using TEST_APP.Services;
 
 namespace ModeratorApp;
 

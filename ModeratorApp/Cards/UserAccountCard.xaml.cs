@@ -16,7 +16,9 @@ public partial class UserAccountCard : ContentView
 
 	private void InitData(Models.Volunteer volunteer_data) {
 		VolunteerName.Text = volunteer_data.name;
-		UserImage.Source = ImageService.BytesToImageSource(Convert.FromBase64String(volunteer_data.user_img));
+
+        if(volunteer_data.user_img != string.Empty)
+            UserImage.Source = ImageService.BytesToImageSource(Convert.FromBase64String(volunteer_data.user_img));
 
 		if (volunteer_data.is_validated) {
 			StatusLabel.Text = "Validada";

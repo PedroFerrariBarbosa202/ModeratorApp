@@ -1,9 +1,6 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Maui.Storage;
 using ModeratorApp.Cards;
 using ModeratorApp.Services;
-using System.Data;
-using TEST_APP.Services;
+
 
 namespace ModeratorApp;
 

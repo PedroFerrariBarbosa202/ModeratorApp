@@ -2,7 +2,6 @@ using Microsoft.Data.SqlClient;
 using ModeratorApp.Services;
 using System.Data;
 using System.Diagnostics;
-using TEST_APP.Services;
 
 namespace ModeratorApp.Cards;
 

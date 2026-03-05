@@ -1,6 +1,6 @@
 using ModeratorApp.Content.View;
 using ModeratorApp.Models;
-using TEST_APP.Services;
+using ModeratorApp.Services;
 
 namespace ModeratorApp.Content.View;
 
@@ -24,6 +24,12 @@ public partial class AccountDetailsView : ContentView
         AgeLabel.Text = $"Idade: {volunteer_data.age.ToString()}";
         EmailLabel.Text = $"Email: {volunteer_data.email}";
         PasswordLabel.Text = $"Senha: {volunteer_data.password}";
+        PhoneLabel.Text = $"Telefone: {volunteer_data.phone}";
+        ProfessionLabel.Text = $"Emprego: {volunteer_data.profession}";
+        CompanyLabel.Text = $"Empresa: {volunteer_data.company}";
+
+        if (volunteer_data.user_img != string.Empty)
+            UserImage.Source = ImageService.BytesToImageSource(Convert.FromBase64String(volunteer_data.user_img));
     }
 
     private async void InitSectors() {

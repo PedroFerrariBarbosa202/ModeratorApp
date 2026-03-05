@@ -1,7 +1,4 @@
-using Microsoft.Data.SqlClient;
 using ModeratorApp.Services;
-using System.Diagnostics;
-using TEST_APP.Services;
 
 namespace ModeratorApp.Cards;
 

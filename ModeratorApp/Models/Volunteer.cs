@@ -16,16 +16,25 @@ namespace ModeratorApp.Models {
             [Column("password")]
             public string password { get; set; }
 
-            [Column("age")]
-            public int age { get; set; }
+            [Column("birth_date")]
+            public DateOnly age { get; set; }
+
+            [Column("profession")]
+            public string profession { get; set; }
+
+            [Column("company")]
+            public string company { get; set; }
+
+            [Column("phone")]
+            public string phone { get; set; }
 
             [Column("user_img")]
             public string user_img { get; set; }
 
-        [Column("is_validated")]
-        public bool is_validated { get; set; } = false;
+            [Column("is_validated")]
+            public bool is_validated { get; set; } = false;
 
-        [Column("solicitation_seen")]
-        public bool solicitation_seen { get; set; } = false;
+            [Column("solicitation_seen")]
+            public bool solicitation_seen { get; set; } = false;
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Supabase;
-using Supabase.Postgrest.Attributes;
-using Supabase.Postgrest.Models;
+using Microsoft.Maui.Networking;
 
-namespace TEST_APP.Services {
+namespace ModeratorApp.Services {
     public static class DatabaseConnector {
         private static readonly string url =
             "https://xacemhnbvvfqpzzbcwei.supabase.co";
@@ -16,12 +15,24 @@ namespace TEST_APP.Services {
             if (Client != null)
                 return;
 
-            var options = new SupabaseOptions {
-                AutoConnectRealtime = false
-            };
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet) {
+                throw new InvalidOperationException(
+                    "Sem conexão com a internet. Verifique sua rede antes de continuar.");
+            }
 
-            Client = new Client(url, anonKey, options);
-            await Client.InitializeAsync();
+            try {
+                var options = new SupabaseOptions {
+                    AutoConnectRealtime = false
+                };
+
+                Client = new Client(url, anonKey, options);
+
+                await Client.InitializeAsync();
+            }
+            catch (Exception ex) {
+                Client = null; 
+                throw new Exception("Erro ao conectar com o servidor Supabase.", ex);
+            }
         }
     }
 }

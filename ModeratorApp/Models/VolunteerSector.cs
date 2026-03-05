@@ -13,5 +13,8 @@ namespace ModeratorApp.Models {
 
         [Column("sector_id")]
         public int sector_ID { get; set; }
+
+        [Column("is_validated")]
+        public bool is_validated { get; set; }
     }
 }

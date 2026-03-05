@@ -15,6 +15,6 @@ namespace ModeratorApp.Models {
         public DateTime created_at { get; set; }
 
         [Column("finished_at")]
-        public DateTime finished_at { get; set; }
+        public DateTime? finished_at { get; set; }
     }
 }

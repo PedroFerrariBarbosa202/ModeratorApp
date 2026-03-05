@@ -1,9 +1,7 @@
 using Microcharts;
-using ModeratorApp.Models;
 using SkiaSharp;
-using System;
+using ModeratorApp.Services;
 using System.Globalization;
-using TEST_APP.Services;
 namespace ModeratorApp.Content.Calendar;
 
 public partial class CalendarView : ContentView
@@ -11,7 +9,7 @@ public partial class CalendarView : ContentView
 	const int Rows = 20;
     const int Column_Length = 6;
 
-    List<(DateTime, DateTime)>? _days_active = null;
+    List<(DateTime, DateTime?)>? _days_active = null;
 
     public CalendarView()
 	{
@@ -31,7 +29,7 @@ public partial class CalendarView : ContentView
 
         int daysInMonth = DateTime.DaysInMonth(year, month);
 
-        List<(DateTime start, DateTime end)> days_active =
+        List<(DateTime start, DateTime? end)> days_active =
             await ActiveOnDays(
                 (new DateTime(year, month, 1),
                  new DateTime(year, month, daysInMonth)),
@@ -51,7 +49,7 @@ public partial class CalendarView : ContentView
                 var activity = days_active
                     .FirstOrDefault(a => a.start.Date == currentDay.Date);
 
-                TimeSpan time = activity.end - activity.start;
+                TimeSpan time = activity.end.Value - activity.start;
                 float hours = (float)time.TotalHours;
                 float rounded = (float)Math.Round(hours, 1);
 
@@ -81,6 +79,7 @@ public partial class CalendarView : ContentView
     async void InitUserPicker() {
         var response = await DatabaseConnector.Client
               .From<Models.Volunteer>()
+              .Where(x => x.is_validated == true)
               .Get();
         foreach(var user in response.Models) {
             CalendarUserPicker.Items.Add(user.name);
@@ -127,7 +126,7 @@ public partial class CalendarView : ContentView
         int days_in_month = DateTime.DaysInMonth(year, month);
 
         // create list of days that volunteer is active
-        List<(DateTime, DateTime)> days_active = await ActiveOnDays((new DateTime(year, month, 1), new DateTime(year, month, 1)), volunteer.volunteer_ID);
+        List<(DateTime, DateTime?)> days_active = await ActiveOnDays((new DateTime(year, month, 1), new DateTime(year, month, 1)), volunteer.volunteer_ID);
         _days_active = days_active;
 
         // init month label
@@ -154,7 +153,7 @@ public partial class CalendarView : ContentView
     }
 
     // adds the calendar day object to grid
-    private void AddDay(DateTime time_to_check, List<(DateTime, DateTime)> days_active, int x, int y, int day_counter) {
+    private void AddDay(DateTime time_to_check, List<(DateTime, DateTime?)> days_active, int x, int y, int day_counter) {
 
         // send to CalendarDay class if volunteer was active on day
         bool wasActive = days_active.Any(d => d.Item1.Date == time_to_check.Date);
@@ -169,12 +168,13 @@ public partial class CalendarView : ContentView
     }
 
     // returns a list of the active days a volunteer has, from time begin to time end
-    async Task<List<(DateTime, DateTime)>> ActiveOnDays((DateTime, DateTime) time_to_check, int vol_id) {
-        List<(DateTime, DateTime)> days_active = new List<(DateTime, DateTime)>();
+    async Task<List<(DateTime, DateTime?)>> ActiveOnDays((DateTime, DateTime?) time_to_check, int vol_id) {
+        List<(DateTime, DateTime?)> days_active = new List<(DateTime, DateTime?)>();
 
         var response = await DatabaseConnector.Client
               .From<Models.Activity>()
               .Where(x => x.volunteer_ID == vol_id)
+              .Where(x => x.finished_at != null)
               .Get();
 
         // populate list
@@ -254,7 +254,7 @@ public partial class CalendarView : ContentView
 
         foreach (var day in _days_active) {
             // get the time that the volunteer was active
-            TimeSpan tempo = day.Item2 - day.Item1;
+            TimeSpan tempo = day.Item2.Value - day.Item1;
             string formated_time = $"{(int)tempo.TotalHours}h {tempo.Minutes}min";
 
             report.AddContent(new ContentCommand {

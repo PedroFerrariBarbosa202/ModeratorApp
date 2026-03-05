@@ -102,6 +102,9 @@
 	  <MauiXaml Update="Cards\NewsCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Cards\RoleChangeSolicitationCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Cards\RoleLimitCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

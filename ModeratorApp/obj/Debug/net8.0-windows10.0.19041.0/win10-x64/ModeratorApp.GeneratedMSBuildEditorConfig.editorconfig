@@ -52,6 +52,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.NewsCar
 build_metadata.AdditionalFiles.TargetPath = Cards\NewsCard.xaml
 build_metadata.AdditionalFiles.RelativePath = Cards\NewsCard.xaml
 
+[C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/RoleChangeSolicitationCard.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.RoleChangeSolicitationCard.xaml
+build_metadata.AdditionalFiles.TargetPath = Cards\RoleChangeSolicitationCard.xaml
+build_metadata.AdditionalFiles.RelativePath = Cards\RoleChangeSolicitationCard.xaml
+
 [C:/Users/Usuario/OneDrive/Desktop/Apps/ModeratorApp/ModeratorApp/Cards/RoleLimitCard.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = ModeratorApp.Cards.RoleLimitCard.xaml

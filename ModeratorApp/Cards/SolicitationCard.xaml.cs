@@ -1,6 +1,5 @@
 using ModeratorApp.Services;
 using ModeratorApp.Content.View;
-using TEST_APP.Services;
 
 namespace ModeratorApp.Cards;
 
@@ -17,7 +16,6 @@ public partial class SolicitationCard : ContentView {
 
     void InitializeFields() {
         Name.Text = $"Nome: {data.name}";
-        Age.Text = $"Idade: {data.age.ToString()}";
         Email.Text = $"Email: {data.email}";
         Password.Text = $"Senha: {data.password}";
     }

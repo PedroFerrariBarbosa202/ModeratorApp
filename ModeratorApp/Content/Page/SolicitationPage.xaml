@@ -5,38 +5,45 @@
              xmlns:cards="clr-namespace:ModeratorApp.Cards"
              BackgroundColor="#262626">
 
-    <ScrollView>
-        <VerticalStackLayout>
-            <Grid ColumnDefinitions="*, Auto" RowDefinitions="*">
-                <Label 
-                    Text="Solicitações:"
-                    FontSize="25"
-                    TextColor="White"
-                    Margin="30,10,0,0"
-                    VerticalOptions="Center"
-                    Grid.Column="0"/>
+    <Grid x:Name="ContentGrid">
+        <ScrollView>
+            <VerticalStackLayout>
+                <Grid ColumnDefinitions="*, Auto" RowDefinitions="*">
+                    <Label 
+                        Text="Solicitações:"
+                        FontSize="25"
+                        TextColor="White"
+                        Margin="30,10,0,0"
+                        VerticalOptions="Center"
+                        Grid.Column="0"/>
 
-                <VerticalStackLayout Grid.Column="1" Margin="0,10,30,0">
-                    <Label TextColor="White"
-                           FontSize="15"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center">Filtrar Solicitações</Label>
-                    <Picker WidthRequest="200"
-                            BackgroundColor="White">
-                        <Picker.Items>
-                            <x:String>Validação de Conta</x:String>
-                            <x:String>Adição de Setor</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </VerticalStackLayout>
-            </Grid>
+                    <VerticalStackLayout Grid.Column="1" Margin="0,10,30,0">
+                        <Label TextColor="White"
+                               FontSize="15"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">Filtrar Solicitações</Label>
+                        <Picker x:Name="FilterPicker"
+                                WidthRequest="200"
+                                BackgroundColor="White"
+                                SelectedIndex="0"
+                                SelectedItem="Todas"
+                                SelectedIndexChanged="OnPickerChanged">
+                            <Picker.Items>
+                                <x:String>Todas</x:String>
+                                <x:String>Validação de Conta</x:String>
+                                <x:String>Edição de Setor</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </VerticalStackLayout>
+                </Grid>
         
-            <VerticalStackLayout x:Name="SolicitationStack"
-                                 HorizontalOptions="Center"
-                                 Margin="0,50,0,0"
-                                 Spacing="30">
+                <VerticalStackLayout x:Name="SolicitationStack"
+                                     HorizontalOptions="Center"
+                                     Margin="0,50,0,0"
+                                     Spacing="30">
 
+                </VerticalStackLayout>
             </VerticalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+    </Grid>
 </ContentPage>

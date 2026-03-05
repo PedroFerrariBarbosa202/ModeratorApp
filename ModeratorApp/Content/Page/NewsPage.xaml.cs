@@ -1,8 +1,8 @@
 using ModeratorApp.Content;
 using ModeratorApp.Cards;
+using ModeratorApp.Services;
 using ModeratorApp.Content.View;
-using System.Diagnostics;
-using TEST_APP.Services;
+
 
 namespace ModeratorApp;
 

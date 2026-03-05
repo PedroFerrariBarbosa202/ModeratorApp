@@ -61,40 +61,83 @@
                             <!-- Entries adapt width automatically -->
                             <Border WidthRequest="200"
                                    HeightRequest="200"
-                                    Margin="0,0,0,20">
+                                    Margin="0,0,0,20"
+                                    Stroke="#1C1C1C">
 
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="100"/>
+                                    <RoundRectangle CornerRadius="10"/>
                                 </Border.StrokeShape>
 
-                                <Image Source="trash.png"/>
+                                <Image x:Name="UserImage"
+                                    Source="no_img.png"
+                                    Aspect="AspectFill"/>
                             </Border>
+
+                            <Label Margin="30,0,0,0"
+                                   Text="Dados Pessoais:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"/>
 
                             <Label x:Name="NameLabel"
                                    Text="Nome:"
                                    FontSize="20"
-                                   FontAttributes="Bold"
                                    TextColor="White"
                                    HorizontalOptions="Center"/>
 
                             <Label x:Name="AgeLabel"
                                    Text="Idade:"
                                    FontSize="20"
-                                   FontAttributes="Bold"
                                    TextColor="White"
                                    HorizontalOptions="Center"/>
+
+                            <Label x:Name="PhoneLabel"
+                                   Text="Telefone:"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+                            
+                            
+
+                            <Label Margin="30,30,0,0"
+                                   Text="Dados Profissionais:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"/>
+
+                            <Label x:Name="ProfessionLabel"
+                                   Text="Empresa:"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+                            
+                            <Label x:Name="CompanyLabel"
+                                   Text="Emprego:"
+                                   FontSize="20"
+
+                                   TextColor="White"
+                                   HorizontalOptions="Center"/>
+                            
+                            
+
+                            <Label Margin="30,30,0,0"
+                                   Text="Acesso à Conta:"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"/>
 
                             <Label x:Name="EmailLabel"
                                    Text="Email:"
                                    FontSize="20"
-                                   FontAttributes="Bold"
                                    TextColor="White"
                                    HorizontalOptions="Center"/>
 
                             <Label x:Name="PasswordLabel"
                                    Text="Senha:"
                                    FontSize="20"
-                                   FontAttributes="Bold"
                                    TextColor="White"
                                    HorizontalOptions="Center"/>
 

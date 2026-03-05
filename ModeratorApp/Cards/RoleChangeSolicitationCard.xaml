@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ModeratorApp.Cards.SolicitationCard">
+             x:Class="ModeratorApp.Cards.RoleChangeSolicitationCard">
 
     <VerticalStackLayout Spacing="30">
         <Grid ColumnDefinitions="Auto, 10, Auto, 10, Auto" RowDefinitions="*, *">
             <!-- left border (info)-->
             <Border BackgroundColor="White" 
-                    WidthRequest="400" 
-                    HeightRequest="200"
-                    Stroke="DarkGreen"
+
+                    HeightRequest="100"
+                    Stroke="DarkBlue"
                     StrokeThickness="3"
                     Grid.Column="0">
 
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="10"/>
-                    </Border.StrokeShape>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
 
-                    <Grid RowDefinitions="Auto, *">
+                <Grid Margin="30,20,0,0">
+                    <HorizontalStackLayout>
                         <Label Margin="10,10,0,0"
                                TextColor="Black"
                                FontSize="20"
-                               Grid.Row="0"
-                               FontAttributes="Bold">Pedido de validação de conta:</Label>
+                               FontAttributes="Bold">Pedido de troca de setor de </Label>
 
-                    <VerticalStackLayout Grid.Row="1" Margin="30,20,0,0" Spacing="10">
                         <Label TextColor="Black"
-                               x:Name="Name"
-                               FontSize="15">Nome:</Label>
-                        <Label TextColor="Black"
-                               x:Name="Email"
-                               FontSize="15">Email:</Label>
-                        <Label TextColor="Black"
-                               x:Name="Password"
-                               FontSize="15">Senha:</Label>
-                    </VerticalStackLayout>
+                               FontSize="20"
+                               Margin="10,10,40,0"
+                               x:Name="Name"></Label>
+                    </HorizontalStackLayout>
                 </Grid>
             </Border>
 
@@ -43,7 +37,7 @@
                     WidthRequest="300" 
                     HeightRequest="200" 
                     VerticalOptions="Center"
-                    Stroke="DarkGreen"
+                    Stroke="DarkBlue"
                     StrokeThickness="3"
                     Grid.Column="2">
 
@@ -57,8 +51,8 @@
                      VerticalOptions="Fill">
                         <Label Margin="0,10,0,10"
                                FontSize="20"
-                               FontAttributes="Bold">Setores:</Label>
-                    
+                               FontAttributes="Bold">Setores escolhidos:</Label>
+
                     </VerticalStackLayout>
                 </ScrollView>
             </Border>
@@ -69,7 +63,7 @@
                     WidthRequest="250" 
                     HeightRequest="200" 
                     VerticalOptions="Center"
-                    Stroke="DarkGreen"
+                    Stroke="DarkBlue"
                     StrokeThickness="3"
                     Grid.Column="4">
 
@@ -85,7 +79,7 @@
                                 Grid.Row="0" 
                                 HeightRequest="60" 
                                 BackgroundColor="Green"
-                                Clicked="OnVerifyButtonClicked"/>
+                                Clicked="ValidateRequest"/>
                     <Button Text="Negar Validação"
                                 TextColor="White"
                                 Grid.Row="2" 
@@ -103,7 +97,7 @@
                  Stroke="White">
 
             <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="20"/>
+                <RoundRectangle CornerRadius="20"/>
             </Border.StrokeShape>
         </Border>
     </VerticalStackLayout>

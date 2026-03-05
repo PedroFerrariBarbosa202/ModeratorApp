@@ -1,7 +1,4 @@
-using Microcharts;
 using ModeratorApp.Services;
-using SkiaSharp;
-using TEST_APP.Services;
 
 namespace ModeratorApp;
 
@@ -10,12 +7,21 @@ public partial class EntrancePage : ContentPage
 	public EntrancePage()
 	{
 		InitializeComponent();
-        InitUI();
+        CheckSystemActivity();
+    }
+
+    private async void CheckSystemActivity() {
+        try {
+            await DatabaseConnector.InitializeAsync();
+            InitUI();
+        }
+        catch (Exception ex) {
+            SystemStatusLabel.Text = ex.Message;
+            return;
+        }
     }
 
 	async void InitUI() {
-        await DatabaseConnector.InitializeAsync();
-
         // registered events counter
         var events = await DatabaseConnector.Client
                .From<Models.Events>()
@@ -45,5 +51,12 @@ public partial class EntrancePage : ContentPage
                .Get();
 
         Sectors.Text = $"{sectors.Models.Count}";
+
+        // news counter
+        var news = await DatabaseConnector.Client
+               .From<Models.News>()
+               .Get();
+
+        News.Text = $"{sectors.Models.Count}";
     }
 }

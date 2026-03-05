@@ -1,8 +1,4 @@
-using Microsoft.Data.SqlClient;
 using ModeratorApp.Services;
-using System.Data;
-using System.Threading;
-using TEST_APP.Services;
 namespace ModeratorApp.Cards;
 
 public partial class EventCard : ContentView
