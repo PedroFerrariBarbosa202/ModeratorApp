@@ -16,5 +16,8 @@ namespace ModeratorApp.Models {
 
         [Column("finished_at")]
         public DateTime? finished_at { get; set; }
+
+        [Column("hours_diff")]
+        public float? hours_diff { get; set; }
     }
 }

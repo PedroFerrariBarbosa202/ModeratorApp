@@ -1,8 +1,6 @@
-using ModeratorApp.Content;
 using ModeratorApp.Cards;
 using ModeratorApp.Services;
 using ModeratorApp.Content.View;
-
 
 namespace ModeratorApp;
 
@@ -15,10 +13,9 @@ public partial class NewsPage : ContentPage
 	}
 
 	public async void InitNewsCards(object? sender, EventArgs? e) {
-		Loading loading_page = new Loading();
-		ContentGrid.Children.Add(loading_page);
+        OverlayManager.SetLoadingOverlay(ContentGrid);
 
-		NewsStack.Children.Clear();
+        NewsStack.Children.Clear();
 
         var response = await DatabaseConnector.Client
 			 .From<Models.News>()
@@ -36,10 +33,10 @@ public partial class NewsPage : ContentPage
             NewsStack.Children.Add(card);
 		}
 
-        ContentGrid.Children.Remove(loading_page);
+        OverlayManager.RemoveLoadingOverlay(ContentGrid);
     }
 
-	private void OnOpenNewsFormClicked(object sender, EventArgs e) {
+    private void OnOpenNewsFormClicked(object sender, EventArgs e) {
 		AddNewsForm(null);
 	}
 

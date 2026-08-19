@@ -1,4 +1,6 @@
-﻿namespace ModeratorApp
+﻿using ModeratorApp.Services;
+
+namespace ModeratorApp
 {
     public partial class App : Application
     {

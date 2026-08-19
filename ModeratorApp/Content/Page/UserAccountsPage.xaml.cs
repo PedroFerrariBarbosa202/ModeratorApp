@@ -12,11 +12,14 @@ public partial class UserAccountsPage : ContentPage
         InitUserAccountCards();
     }
 
+    public Grid GetContentGrid() {
+        return ContentGrid;
+    }
+
 	public async void InitUserAccountCards() {
         try {
             // add loading screen
-            Loading loading_page = new Loading();
-            ContentGrid.Children.Add(loading_page);
+            OverlayManager.SetLoadingOverlay(ContentGrid);
 
             // clear all children first
             UserAccountStack.Children.Clear();
@@ -31,7 +34,7 @@ public partial class UserAccountsPage : ContentPage
                 UserAccountStack.Children.Add(card);
             }
 
-            ContentGrid.Children.Remove(loading_page);
+            OverlayManager.RemoveLoadingOverlay(ContentGrid);
         }
         catch (Exception ex) {
             await DisplayAlert("Erro detectado", ex.Message, "Continuar");

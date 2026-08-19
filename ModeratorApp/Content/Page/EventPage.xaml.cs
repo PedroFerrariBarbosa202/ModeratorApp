@@ -1,6 +1,4 @@
-
 using ModeratorApp.Cards;
-using ModeratorApp.Content;
 using ModeratorApp.Services;
 using System.Diagnostics;
 
@@ -24,8 +22,7 @@ public partial class EventPage : ContentPage {
 
     private async void ShowClients() {
         // add loading screen
-        Loading loading_page = new Loading();
-        ContentGrid.Children.Add(loading_page);
+        OverlayManager.SetLoadingOverlay(ContentGrid);
 
         // get all events from Volunteer_event connected to a specific ID
         var response = await DatabaseConnector.Client
@@ -103,11 +100,10 @@ public partial class EventPage : ContentPage {
         }
 
         // remove loading page
-        ContentGrid.Children.Remove(loading_page);
+        OverlayManager.RemoveLoadingOverlay(ContentGrid);
     }
 
     private async void AddRoles() {
-        await DatabaseConnector.InitializeAsync();
 
         // get all role_ids that are associated with a event
         var response = await DatabaseConnector.Client
@@ -117,6 +113,7 @@ public partial class EventPage : ContentPage {
 
         foreach(Models.EventRole row in response.Models) {
             // get role info by role_ID
+
             var role = await DatabaseConnector.Client
               .From<Models.Roles>()
               .Where(v => v.role_ID == row.role_ID)

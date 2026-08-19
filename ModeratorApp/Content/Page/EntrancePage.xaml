@@ -35,7 +35,7 @@
 
             <!-- ESTATÍSTICAS -->
             <Grid ColumnDefinitions="*,*"
-                  RowDefinitions="*, *, *, *"
+                  RowDefinitions="*, *, *, *, *, *"
                   ColumnSpacing="15"
                   RowSpacing="15">
 
@@ -121,24 +121,7 @@
                     </VerticalStackLayout>
                 </Frame>
 
-                <!-- Tempo Monitorado 
-                <Frame Grid.Row="2" Grid.ColumnSpan="2"
-                       BackgroundColor="#3A3A3A"
-                       CornerRadius="18"
-                       Padding="15">
-                    <VerticalStackLayout Spacing="8">
-                        <Label Text="Tempo Monitorado Hoje"
-                               TextColor="#AAAAAA"
-                               FontSize="13"/>
-
-                        <ProgressBar Progress="0.65"
-                                     HeightRequest="8"/>
-
-                        <Label Text="65% do limite diário utilizado"
-                               TextColor="#CCCCCC"
-                               FontSize="12"/>
-                    </VerticalStackLayout> 
-                </Frame>-->
+               
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

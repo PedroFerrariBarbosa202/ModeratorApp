@@ -1,5 +1,5 @@
-﻿using Supabase;
-using Microsoft.Maui.Networking;
+﻿
+using Supabase;
 
 namespace ModeratorApp.Services {
     public static class DatabaseConnector {
@@ -14,11 +14,6 @@ namespace ModeratorApp.Services {
         public static async Task InitializeAsync() {
             if (Client != null)
                 return;
-
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet) {
-                throw new InvalidOperationException(
-                    "Sem conexão com a internet. Verifique sua rede antes de continuar.");
-            }
 
             try {
                 var options = new SupabaseOptions {

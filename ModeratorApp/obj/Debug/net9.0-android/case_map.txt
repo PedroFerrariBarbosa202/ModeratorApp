@@ -1,5 +1,7 @@
 images\dotnet_bot;images\dotnet_bot
 images\dummyappimage;images\dummyappimage
+images\imgchoose;images\imgchoose
+images\no_img;images\no_img
 images\seta_baixo;images\seta_baixo
 images\seta_cima;images\seta_cima
 images\trash;images\trash

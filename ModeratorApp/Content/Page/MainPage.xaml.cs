@@ -16,11 +16,9 @@ public partial class MainPage : ContentPage
 
     private async void ExecuteQuery()
     {
-        Loading loading_page = new Loading();
-
         try {
             // add loading screen
-            ContentGrid.Children.Add(loading_page);
+            OverlayManager.SetLoadingOverlay(ContentGrid);
 
             await DatabaseConnector.InitializeAsync();
             var response = await DatabaseConnector.Client
@@ -33,11 +31,11 @@ public partial class MainPage : ContentPage
             }
 
             // remove loading
-            ContentGrid.Children.Remove(loading_page);
+            OverlayManager.RemoveLoadingOverlay(ContentGrid);
         }
-        catch(Exception ex){
+        catch (Exception ex){
             // remove loading
-            ContentGrid.Children.Remove(loading_page);
+            OverlayManager.RemoveLoadingOverlay(ContentGrid);
 
             await DisplayAlert("Erro detectado", ex.Message, "Continuar");
         }

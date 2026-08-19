@@ -5,31 +5,33 @@
              Title="LoginPage"
              Shell.FlyoutBehavior="Disabled"
              BackgroundColor="#262626">
-    
-    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
-        <Label 
-            Text="BEM VINDO(A) DE VOLTA!"
-            FontSize="40"
-            HorizontalOptions="Center" 
-            VerticalOptions="Center"
-            Margin="0, 0, 0, 50"
-            TextColor="White"/>
 
-        <Entry x:Name="Login"
-            Placeholder="LOGIN"
-            WidthRequest="300"
-            BackgroundColor="White"/>
-
-        <Entry x:Name="Password"
-            Placeholder="PASSWORD"
-            WidthRequest="300"
-            BackgroundColor="White"/>
-
-        <Button Text="ENTRAR"
+    <Grid x:Name="RootGrid">
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+            <Label 
+                Text="BEM VINDO(A) DE VOLTA!"
+                FontSize="40"
                 HorizontalOptions="Center" 
                 VerticalOptions="Center"
+                Margin="0, 0, 0, 50"
+                TextColor="White"/>
+
+            <Entry x:Name="Login"
+                Placeholder="LOGIN"
                 WidthRequest="300"
-                Margin="0, 50, 0, 0"
-                Clicked="Submited"/>
-    </VerticalStackLayout>
+                BackgroundColor="White"/>
+
+            <Entry x:Name="Password"
+                Placeholder="PASSWORD"
+                WidthRequest="300"
+                BackgroundColor="White"/>
+
+            <Button Text="ENTRAR"
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center"
+                    WidthRequest="300"
+                    Margin="0, 50, 0, 0"
+                    Clicked="Submited"/>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

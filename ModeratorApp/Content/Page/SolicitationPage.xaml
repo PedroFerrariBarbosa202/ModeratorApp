@@ -31,7 +31,6 @@
                             <Picker.Items>
                                 <x:String>Todas</x:String>
                                 <x:String>Validação de Conta</x:String>
-                                <x:String>Edição de Setor</x:String>
                             </Picker.Items>
                         </Picker>
                     </VerticalStackLayout>

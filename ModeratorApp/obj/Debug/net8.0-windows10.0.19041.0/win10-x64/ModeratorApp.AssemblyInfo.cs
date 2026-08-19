@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ModeratorApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+b92007a9a12c345e4bfbd032020ee608faa853c0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+32942b0a79a391a2e2a0bf1ee58bae266cc967d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ModeratorApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ModeratorApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

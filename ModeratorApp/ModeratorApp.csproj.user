@@ -31,10 +31,10 @@
     <PlatformTarget>arm64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <MauiXaml Update="Cards\RoleLimitCard.xaml">
+    <MauiXaml Update="Content\Components\Cards\RoleLimitCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Cards\SubRoleShowCard.xaml">
+    <MauiXaml Update="Content\Components\Cards\SubRoleShowCard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>

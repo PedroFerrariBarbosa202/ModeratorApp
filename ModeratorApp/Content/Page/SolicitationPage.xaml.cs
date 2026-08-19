@@ -12,8 +12,7 @@ public partial class SolicitationPage : ContentPage {
 
     public async void InitializeSolicitations() {
         try {
-            Loading loading_page = new Loading();
-            ContentGrid.Children.Add(loading_page);
+            OverlayManager.SetLoadingOverlay(ContentGrid);
 
             await DatabaseConnector.InitializeAsync();
 
@@ -22,16 +21,12 @@ public partial class SolicitationPage : ContentPage {
 
             if (FilterPicker.SelectedIndex == 0) {
                 AddAccountValidationCard();
-                AddSectorChangeCard();
             }
             else if (FilterPicker.SelectedIndex == 1) {
                 AddAccountValidationCard();
             }
-            else if (FilterPicker.SelectedIndex == 2) {
-                AddSectorChangeCard();
-            }
 
-            ContentGrid.Children.Remove(loading_page);
+            OverlayManager.RemoveLoadingOverlay(ContentGrid);
         }
         catch (Exception ex) {
             await DisplayAlert("Erro detectado", ex.Message, "Continuar");
@@ -56,24 +51,6 @@ public partial class SolicitationPage : ContentPage {
             .Where(v => v.is_validated == false)
             .Set(v => v.solicitation_seen, true)
             .Update();
-    }
-
-    private async void AddSectorChangeCard() {
-        // Sector change cards
-        var sector_change_solicitation = await DatabaseConnector.Client
-            .From<Models.VolunteerSector>()
-            .Where(v => v.is_validated == false)
-            .Get();
-
-        var groupedByUser = sector_change_solicitation.Models
-            .GroupBy(s => s.volunteer_ID);
-
-        foreach (var userGroup in groupedByUser) {
-            var userSolicitations = userGroup.ToList();
-
-            var card = new RoleChangeSolicitationCard(userSolicitations);
-            SolicitationStack.Children.Add(card);
-        }
     }
 
     private void OnPickerChanged(object sender, EventArgs e) {

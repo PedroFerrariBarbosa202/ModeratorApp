@@ -78,58 +78,61 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Cards\RoleLimitCard.xaml.cs">
+	  <Compile Update="Content\Components\Cards\RoleLimitCard.xaml.cs">
 	    <DependentUpon>RoleLimitCard.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Cards\SubRoleShowCard.xaml.cs">
+	  <Compile Update="Content\Components\Cards\SubRoleShowCard.xaml.cs">
 	    <DependentUpon>SubRoleShowCard.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Cards\RoleReadCard.xaml.cs">
+	  <Compile Update="Content\Components\Cards\RoleReadCard.xaml.cs">
 	    <DependentUpon>RoleReadCard.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Content\Page\EventPage.xaml.cs">
 	    <DependentUpon>EventPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Content\View\NewsForm.xaml.cs">
+	  <Compile Update="Content\Components\View\NewsForm.xaml.cs">
 	    <DependentUpon>NewsForm.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Content\Components\View\Overlays\LoadingOverlay.xaml.cs">
+	    <DependentUpon>LoadingOverlay.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Content\Components\View\Overlays\WarningOverlay.xaml.cs">
+	    <DependentUpon>WarningOverlay.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Cards\EventCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\EventCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\NewsCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\NewsCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\RoleChangeSolicitationCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\RoleLimitCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\RoleLimitCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\SolicitationCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\SolicitationCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\SubRoleShowCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\SubRoleShowCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\RoleReadCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\RoleReadCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\RoleManageCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\RoleManageCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\UserAccountCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\UserAccountCard.xaml">
+	  <MauiXaml Update="Content\Components\Calendar\CalendarDay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\Calendar\CalendarDay.xaml">
+	  <MauiXaml Update="Content\Components\Calendar\CalendarView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\Calendar\CalendarView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Content\Loading.xaml">
+	  <MauiXaml Update="Content\Components\View\Overlays\LoadingOverlay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Content\Page\ActivityPage.xaml">
@@ -147,28 +150,31 @@
 	  <MauiXaml Update="Content\Page\UserAccountsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\View\AccountDetailsView.xaml">
+	  <MauiXaml Update="Content\Components\View\AccountDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\View\EventForm.xaml">
+	  <MauiXaml Update="Content\Components\View\EventForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Content\Page\EventPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Cards\ClientCard.xaml">
+	  <MauiXaml Update="Content\Components\Cards\ClientCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Content\Page\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\View\NewsForm.xaml">
+	  <MauiXaml Update="Content\Components\View\NewsForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\View\RoleForm.xaml">
+	  <MauiXaml Update="Content\Components\View\Overlays\WarningOverlay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Content\View\Tag.xaml">
+	  <MauiXaml Update="Content\Components\View\RoleForm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Content\Components\View\Tag.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -178,11 +184,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Cards\SectorCard.xaml.cs" />
+	  <Compile Remove="Content\Components\Cards\SectorCard.xaml.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Remove="Cards\SectorCard.xaml" />
+	  <MauiXaml Remove="Content\Components\Cards\SectorCard.xaml" />
 	</ItemGroup>
 
 </Project>

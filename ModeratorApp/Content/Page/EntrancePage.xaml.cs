@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml.Controls;
 using ModeratorApp.Services;
 
 namespace ModeratorApp;
@@ -58,5 +59,55 @@ public partial class EntrancePage : ContentPage
                .Get();
 
         News.Text = $"{sectors.Models.Count}";
+    }
+
+    private void CreateReport(object? sender, EventArgs e) {
+
+        // create pdf
+        var report = new ReportDocument();
+        report.SetTitle("Relatório de atividade do voluntário");
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Spacing,
+            magnitude = 16,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Text,
+            content = $"TODO",
+            font_size = 18,
+            bold = true,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Spacing,
+            magnitude = 6,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Text,
+            content = $"TODO",
+            font_size = 18,
+            bold = true,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Text,
+            content = $"TODO",
+            font_size = 16,
+            bold = true,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.LineHorizontal,
+            thickness = 2,
+        });
+
+        report.AddContent(new ContentCommand {
+            type = ContentType.Spacing,
+            magnitude = 5,
+        });
+
+        report.Compose();
     }
 }
